@@ -1,0 +1,178 @@
+[
+    {
+        "id": 3,
+        "floorName": "3rd Floor",
+        "seats": [
+            {
+                "deskNr": 1,
+                "occupied": "Max",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 2,
+                "occupied": "Dave",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 3,
+                "occupied": "Tom",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 4,
+                "occupied": "Max",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 5,
+                "occupied": "Dave",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 6,
+                "occupied": "Tom",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 7,
+                "occupied": "Max",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 8,
+                "occupied": "Dave",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 9,
+                "occupied": "Tom",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 10,
+                "occupied": "Max",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 11,
+                "occupied": "Dave",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 12,
+                "occupied": "Tom",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 13,
+                "occupied": "Tom",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 14,
+                "occupied": "Max",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 15,
+                "occupied": "Dave",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 16,
+                "occupied": "Tom",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 17,
+                "occupied": "Max",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 18,
+                "occupied": "Dave",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 19,
+                "occupied": "Tom",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 20,
+                "occupied": "Max",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 21,
+                "occupied": "Dave",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 22,
+                "occupied": "Tom",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 23,
+                "occupied": "Max",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 24,
+                "occupied": "Dave",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 25,
+                "occupied": "Tom",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 26,
+                "occupied": "Max",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 27,
+                "occupied": "Dave",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 28,
+                "occupied": "Tom",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 29,
+                "occupied": "Tom",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 30,
+                "occupied": "Max",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 31,
+                "occupied": "Dave",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 32,
+                "occupied": "Tom",
+                "date": "2022-11-15"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "floorName": "4th Floor",
+        "seats": []
+    },
+    {
+        "id": 5,
+        "floorName": "5th Floor",
+        "seats": []
+    }
+]
