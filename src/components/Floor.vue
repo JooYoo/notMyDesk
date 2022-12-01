@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="floor-container">
     <DeskGroup
       v-for="(group, id) in seatGroups"
       :key="id"
@@ -69,15 +69,19 @@ export default {
       return groups;
     },
   },
-  // mounted() {
-  //   let seats = this.currentFloor.seats;
-
-  //   let test = this.gatherGroups(seats, this.eachGroupCounts);
-
-  //   console.log(seats);
-  // },
 };
 </script>
   
-<style>
+<style lang="scss" scoped>
+.floor-container {
+  padding: 40px;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(3, auto);
+  align-content: center;
+  justify-content: space-evenly;
+  gap: 40px;
+}
 </style>

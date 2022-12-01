@@ -1,9 +1,10 @@
 <template>
-  <div class="container">
+  <div class="desk-group-container">
     <Desk
       v-for="seat in seatGroup"
       :key="seat.deskNr"
       :seat="seat"
+      class="desk"
     />
   </div>
 </template>
@@ -19,5 +20,25 @@ export default {
 };
 </script>
   
-<style>
+<style lang="scss" scoped>
+.desk-group-container {
+  width: fit-content;
+
+  display: grid;
+  gap: 10px;
+  align-content: center;
+  justify-items: start;
+
+  &:nth-child(-n + 4) {
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
+  }
+  &:nth-child(n + 5) {
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(2, auto);
+  }
+}
+
+.desk {
+}
 </style>

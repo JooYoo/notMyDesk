@@ -9,9 +9,9 @@
         @click="switchFloor(floor)"
       />
     </SideNav>
-    <div class="desk-container">
-      <Floor :currentFloor="currentFloor" />
-    </div>
+
+    <Floor :currentFloor="currentFloor" />
+
   </div>
 </template>
 

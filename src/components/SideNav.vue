@@ -13,7 +13,7 @@ export default {};
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 92px;
+  width: fit-content;
   border: 4px solid darkgray;
 }
 </style>
