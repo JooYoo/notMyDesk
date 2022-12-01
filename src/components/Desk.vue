@@ -5,7 +5,7 @@
         <v-btn
           color="primary"
           v-bind="props"
-        > Desk 1 </v-btn>
+        > {{seat.deskNr}} {{seat.occupied}} </v-btn>
       </template>
 
       <v-card>
@@ -34,6 +34,7 @@ export default {
       dialog: false,
     };
   },
+  props: ["seat"],
 };
 </script>
   

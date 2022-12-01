@@ -1,32 +1,38 @@
 <template>
   <div>
-    <!-- computed the currentFloor-seats to 6 groups: 6,6,6,6,4,4 -->
-    <!-- create DeskGroup, style each Group independently  -->
-    <!-- style the 6 groups  -->
-    <Desk
-      v-for="seat in currentFloor.seats"
-      :key="seat.id"
+    <DeskGroup
+      v-for="(group, id) in seatGroups"
+      :key="id"
+      :seatGroup="group"
     />
   </div>
 </template>
   
-  <script>
+<script>
 import DeskComponent from "./Desk.vue";
+import DeskGroupComponent from "./DeskGroup.vue";
 
 export default {
   components: {
     Desk: DeskComponent,
+    DeskGroup: DeskGroupComponent,
   },
   props: ["currentFloor"],
   data() {
     return {
-      deskGroup: null,
       eachGroupCounts: [6, 6, 6, 6, 4, 4],
     };
   },
   computed: {
     seatGroups() {
       let seats = this.currentFloor.seats;
+
+      if (!seats) {
+        return [];
+      }
+
+      console.log(this.gatherGroups(seats, this.eachGroupCounts));
+
       return this.gatherGroups(seats, this.eachGroupCounts);
     },
   },
@@ -63,8 +69,15 @@ export default {
       return groups;
     },
   },
+  // mounted() {
+  //   let seats = this.currentFloor.seats;
+
+  //   let test = this.gatherGroups(seats, this.eachGroupCounts);
+
+  //   console.log(seats);
+  // },
 };
 </script>
   
-  <style>
+<style>
 </style>

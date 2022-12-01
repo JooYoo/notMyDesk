@@ -2,20 +2,22 @@
   <div class="container">
     <Desk
       v-for="seat in seatGroup"
-      :key="seat.id"
+      :key="seat.deskNr"
+      :seat="seat"
     />
   </div>
 </template>
   
-  <script>
+<script>
 import DeskComponent from "./Desk.vue";
+
 export default {
   components: {
     Desk: DeskComponent,
   },
-  porps: ["seatGroup"],
+  props: ["seatGroup"],
 };
 </script>
   
-  <style>
+<style>
 </style>

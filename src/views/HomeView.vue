@@ -55,23 +55,6 @@ export default {
 </script>
 
 <style>
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  text-align: center;
-
-  height: 100%;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  height: 100%;
-} */
-
 .container {
   display: flex;
   height: 100%;
