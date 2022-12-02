@@ -37,8 +37,8 @@ export default {
   cursor: pointer;
 
   &:hover {
-    // background-color: rgba(0, 0, 0, 0.1);
-    color: rgba(0, 0, 0, 0.5);
+    background-color: black;
+    color: whitesmoke;
   }
 
   &--unselected {
