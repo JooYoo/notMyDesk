@@ -26,6 +26,7 @@
 
         <v-card-text>
           <v-text-field
+            v-model="occupiedBy"
             clearable
             label="take the seat by typing your name"
             variant="outlined"
@@ -48,12 +49,17 @@
   
   <script>
 export default {
+  props: ["seat"],
   data() {
     return {
       dialog: false,
+      occupiedBy: "",
     };
   },
-  props: ["seat"],
+  computed: {
+    // if seat-occupied is null => Empty
+    // if seat-occupied is 'Tom' => ocuppiedBy = 'Tom'
+  },
 };
 </script>
   
