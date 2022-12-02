@@ -11,13 +11,11 @@
     </SideNav>
 
     <Floor :currentFloor="currentFloor" />
-
   </div>
 </template>
 
 <script>
 import JsonFloor from "@/data/floor.json";
-
 import SideNavItemComponent from "@/components/SideNavItem.vue";
 import SideNavComponent from "@/components/SideNav.vue";
 import FloorComponent from "@/components/Floor.vue";

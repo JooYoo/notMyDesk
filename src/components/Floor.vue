@@ -1,21 +1,25 @@
 <template>
   <div class="floor-container">
-    <DeskGroup
-      v-for="(group, id) in seatGroups"
-      :key="id"
-      :seatGroup="group"
-    />
+    <!-- <h1>nihao</h1> -->
+    <WeeklyDatePicker />
+    <div class="desk-groups-wrapper">
+      <DeskGroup
+        v-for="(group, id) in seatGroups"
+        :key="id"
+        :seatGroup="group"
+      />
+    </div>
   </div>
 </template>
   
 <script>
-import DeskComponent from "./Desk.vue";
+import WeeklyDatePickerComponent from "./WeeklyDatePicker.vue";
 import DeskGroupComponent from "./DeskGroup.vue";
 
 export default {
   components: {
-    Desk: DeskComponent,
     DeskGroup: DeskGroupComponent,
+    WeeklyDatePicker: WeeklyDatePickerComponent,
   },
   props: ["currentFloor"],
   data() {
@@ -74,6 +78,10 @@ export default {
   
 <style lang="scss" scoped>
 .floor-container {
+  width: 100%;
+}
+
+.desk-groups-wrapper {
   padding: 40px;
   width: 100%;
 
