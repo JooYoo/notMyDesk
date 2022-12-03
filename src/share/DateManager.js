@@ -1,4 +1,4 @@
-function getWeekDay(key) {
+function getWeekDayEn(key) {
     let weekDay = ""
     switch (key) {
         case 1:
@@ -26,7 +26,7 @@ function getWeekDay(key) {
     return weekDay
 }
 
-function getWeekDays() {
+function getWeekDates() {
     let curr = new Date
     let week = []
 
@@ -36,8 +36,8 @@ function getWeekDays() {
 
         const currDay = {
             fullDate: date,
-            weekDay: getWeekDay(i),
-            day: curr.getDate()
+            weekDay: getWeekDayEn(i),
+            monthDay: curr.getDate()
         }
 
         week.push(currDay)
@@ -46,6 +46,25 @@ function getWeekDays() {
     return week
 }
 
+function getCurrentDate() {
+    let today = new Date
+    // 2022-11-12
+    let currDate = today.toISOString().slice(0, 10)
+    // Mon ~ Sun
+    let weekDay = getWeekDayEn(today.getDay())
+    // 1 ~ 31
+    let monthDay = today.getDate()
+
+    const currDateInfo = {
+        fullDate: currDate,
+        weekDay: weekDay,
+        monthDay: monthDay
+    }
+
+    return currDateInfo
+}
+
 export {
-    getWeekDays
+    getWeekDates,
+    getCurrentDate
 }

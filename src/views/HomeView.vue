@@ -41,8 +41,7 @@ export default {
   },
   methods: {
     switchFloor(floorInfo) {
-      let currentFloor = floorInfo;
-      this.currentFloor = currentFloor;
+      this.currentFloor = floorInfo;
     },
   },
   created() {

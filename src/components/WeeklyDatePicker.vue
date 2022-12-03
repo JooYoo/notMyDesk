@@ -1,19 +1,20 @@
 <template>
   <div class="weekly-date-picker-container">
-    <div class="text-h5 curr-date-txt">DatePicker</div>
+    <div class="text-h5 curr-date-txt">{{currentDate.fullDate}}</div>
     <div class="picker-item-wrapper">
       <WeeklyDatePickerItem
-        v-for="(dayInfo, id) in weekDayInfos"
+        v-for="(weekDate, id) in weekDates"
         :key="id"
-        :weekDay="dayInfo.weekDay"
-        :monthDay="dayInfo.day"
+        :weekDate="weekDate"
+        :selectedDay="currentDate"
+        @click="switchDay(weekDate)"
       />
     </div>
   </div>
 </template>
 
 <script>
-import { getWeekDays } from "@/share/DateManager";
+import { getWeekDates, getCurrentDate } from "@/share/DateManager";
 import WeeklyDatePickerItemCompoent from "./WeeklyDatePickerItem.vue";
 
 export default {
@@ -21,15 +22,23 @@ export default {
     WeeklyDatePickerItem: WeeklyDatePickerItemCompoent,
   },
   data() {
-    return {};
+    return {
+      currentDate: null,
+    };
   },
   computed: {
-    weekDayInfos() {
-      return getWeekDays();
+    weekDates() {
+      return getWeekDates();
     },
   },
-  mounted() {
-    console.log(getWeekDays());
+  methods: {
+    switchDay(dayInfo) {
+      this.currentDate = dayInfo;
+    },
+  },
+
+  created() {
+    this.currentDate = getCurrentDate();
   },
 };
 </script>
