@@ -15,12 +15,20 @@ export default {
   },
   watch: {
     selectedDay(newVal, oldVal) {
-      if (this.weekDate.fullDate === newVal.fullDate) {
+      this.setState(newVal);
+    },
+  },
+  methods: {
+    setState(prop) {
+      if (this.weekDate.fullDate === prop.fullDate) {
         this.state = "picker-item-container--selected";
       } else {
         this.state = "picker-item-container--unselected";
       }
     },
+  },
+  mounted() {
+    this.setState(this.selectedDay);
   },
 };
 </script>
