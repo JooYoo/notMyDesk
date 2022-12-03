@@ -15,17 +15,25 @@ export default {
   watch: {
     // change background-color when visited
     selectedFloor(newVal, oldVal) {
-      if (this.floorInfo.id === newVal.id) {
+      this.setState(newVal);
+    },
+  },
+  methods: {
+    setState(prop) {
+      if (this.floorInfo.id === prop.id) {
         this.state = "container--selected";
       } else {
         this.state = "container--unselected";
       }
     },
   },
+  mounted() {
+    this.setState(this.selectedFloor[0]);
+  },
 };
 </script>
   
-  <style lang="scss" scoped>
+<style lang="scss" scoped>
 .container {
   display: flex;
   justify-content: center;

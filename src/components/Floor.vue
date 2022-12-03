@@ -35,8 +35,6 @@ export default {
         return [];
       }
 
-      console.log(this.gatherGroups(seats, this.eachGroupCounts));
-
       return this.gatherGroups(seats, this.eachGroupCounts);
     },
   },
