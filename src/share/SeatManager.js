@@ -1,3 +1,28 @@
+function createNewFloor(floorId, floorName, fullDate) {
+    // create seats for one floor
+    let newSeats = []
+    for (let i = 1; i < 33; i++) {
+        const newSeat = {
+            "deskNr": i,
+            "occupiedBy": ""
+        }
+        newSeats.push(newSeat)
+    }
+    // new Floor obj
+    const newFloor = {
+        id: floorId,
+        floorName: floorName,
+        date: fullDate,
+        seats: newSeats
+    }
+    return newFloor
+}
+
+// init empty floors for the whole week
+function initEmptyFloorsForOneWeek(params) {
+    // 
+}
+
 function gatherGroups(seats, eachGroupCounts) {
     let groups = [];
     let eachGroup = eachGroupCounts;

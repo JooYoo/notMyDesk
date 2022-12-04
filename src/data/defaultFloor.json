@@ -1,0 +1,40 @@
+[
+    {
+        "id": 3,
+        "floorName": "3rd Floor",
+        "date": "2022-11-15",
+        "seats": [
+            {
+                "deskNr": 1,
+                "occupied": ""
+            },
+            {
+                "deskNr": 2,
+                "occupied": ""
+            },
+            {
+                "deskNr": 3,
+                "occupied": ""
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "floorName": "3rd Floor",
+        "date": "2022-11-16",
+        "seats": [
+            {
+                "deskNr": 1,
+                "occupied": "Max"
+            },
+            {
+                "deskNr": 2,
+                "occupied": "Dave"
+            },
+            {
+                "deskNr": 3,
+                "occupied": "Tom"
+            }
+        ]
+    }
+]

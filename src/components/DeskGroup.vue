@@ -4,7 +4,6 @@
       v-for="seat in seatGroup"
       :key="seat.deskNr"
       :seat="seat"
-      class="desk"
     />
   </div>
 </template>
@@ -37,8 +36,5 @@ export default {
     grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(2, auto);
   }
-}
-
-.desk {
 }
 </style>

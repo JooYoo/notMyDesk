@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import JsonFloor from "@/data/floor.json";
+import JsonFloors from "@/data/floors.json";
 import SideNavItemComponent from "@/components/SideNavItem.vue";
 import SideNavComponent from "@/components/SideNav.vue";
 import FloorComponent from "@/components/Floor.vue";
@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      floors: JsonFloor,
+      floors: JsonFloors,
       currentFloor: null,
     };
   },

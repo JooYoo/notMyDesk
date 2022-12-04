@@ -168,7 +168,23 @@
     {
         "id": 4,
         "floorName": "4th Floor",
-        "seats": []
+        "seats": [
+            {
+                "deskNr": 1,
+                "occupied": "Max",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 2,
+                "occupied": "Dave",
+                "date": "2022-11-15"
+            },
+            {
+                "deskNr": 3,
+                "occupied": "Tom",
+                "date": "2022-11-15"
+            }
+        ]
     },
     {
         "id": 5,
