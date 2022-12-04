@@ -27,17 +27,18 @@ function getWeekDayEn(key) {
 }
 
 function getWeekDates() {
-    let curr = new Date
+    const today = new Date()
     let week = []
 
     for (let i = 1; i <= 7; i++) {
-        let first = curr.getDate() - curr.getDay() + i
-        let date = new Date(curr.setDate(first)).toISOString().slice(0, 10)
+        const startDay = today.getDay() === 0 ? 7 : today.getDay();
+        const day = today.setDate(today.getDate() - startDay + i)
+        const date = new Date(day).toISOString().slice(0, 10)
 
         const currDay = {
             fullDate: date,
             weekDay: getWeekDayEn(i),
-            monthDay: curr.getDate()
+            monthDay: today.getDate()
         }
 
         week.push(currDay)
@@ -51,7 +52,7 @@ function getCurrentDate() {
     // 2022-11-12
     let currDate = today.toISOString().slice(0, 10)
     // Mon ~ Sun
-    let weekDay = getWeekDayEn(today.getDay())
+    let weekDay = getWeekDayEn(today.getDay() == 0 ? 7 : today.getDate())
     // 1 ~ 31
     let monthDay = today.getDate()
 
