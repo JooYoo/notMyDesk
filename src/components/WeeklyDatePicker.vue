@@ -34,6 +34,7 @@ export default {
   methods: {
     switchDay(dayInfo) {
       this.currentDate = dayInfo;
+      // TODO: emit fullDate to get floors that day
     },
   },
 

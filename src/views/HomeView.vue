@@ -2,7 +2,7 @@
   <div class="container">
     <SideNav>
       <SideNavItem
-        v-for="floor in sortedFloors"
+        v-for="floor in floors"
         :key="floor.id"
         :floorInfo="floor"
         :selectedFloor="currentFloor"
@@ -16,6 +16,8 @@
 
 <script>
 import JsonFloors from "@/data/floors.json";
+import { initWeeklyEmptyFloorsBy, getFloorsBy } from "@/share/SeatManager";
+import { getCurrentDate } from "@/share/DateManager";
 import SideNavItemComponent from "@/components/SideNavItem.vue";
 import SideNavComponent from "@/components/SideNav.vue";
 import FloorComponent from "@/components/Floor.vue";
@@ -32,21 +34,29 @@ export default {
       currentFloor: null,
     };
   },
-  computed: {
-    // sort the floor descending
-    sortedFloors() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      return this.floors.sort((a, b) => (a.id < b.id ? 1 : -1));
-    },
-  },
   methods: {
     switchFloor(floorInfo) {
       this.currentFloor = floorInfo;
     },
+    getSortedFloors(theDayFloors) {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      return theDayFloors.sort((a, b) => (a.id < b.id ? 1 : -1));
+    },
   },
   created() {
+    // create this week floors based on floor index
+    let weeklyFloors = initWeeklyEmptyFloorsBy([3, 4, 5]);
+
+    // get current day floors
+    let todayFullDate = getCurrentDate().fullDate;
+    let todayFloors = getFloorsBy(weeklyFloors, todayFullDate);
+
+    // sort floors descending
+    let sortedFloors = this.getSortedFloors(todayFloors);
+    this.floors = sortedFloors;
+
     // active 3rd floor as default
-    this.currentFloor = this.floors.filter((x) => x.id === 3);
+    this.currentFloor = sortedFloors.filter((x) => x.id === 3);
   },
 };
 </script>
