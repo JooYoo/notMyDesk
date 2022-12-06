@@ -1,6 +1,6 @@
 <template>
   <div class="floor-container">
-    <WeeklyDatePicker />
+    <WeeklyDatePicker @selectedDate="getSelectedDate" />
     <div class="desk-groups-wrapper">
       <DeskGroup
         v-for="(group, id) in seatGroups"
@@ -42,6 +42,10 @@ export default {
       }
 
       this.seatGroups = gatherGroups(seats, this.eachGroupCounts);
+    },
+    // pass selected-date from WeeklyDatePicker to HomeView
+    getSelectedDate(theDate) {
+      this.$emit("selectedDate", theDate);
     },
   },
   mounted() {

@@ -10,7 +10,10 @@
       />
     </SideNav>
 
-    <Floor :currentFloor="currentFloor" />
+    <Floor
+      :currentFloor="currentFloor"
+      @selectedDate="getSelectedDate"
+    />
   </div>
 </template>
 
@@ -41,6 +44,11 @@ export default {
     getSortedFloors(theDayFloors) {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       return theDayFloors.sort((a, b) => (a.id < b.id ? 1 : -1));
+    },
+    // get selected-date from Floor
+    getSelectedDate(theDate) {
+      console.log(`📆 ${theDate.fullDate}`);
+      // TODO: based on selected-date to load corresponding floors
     },
   },
   created() {
