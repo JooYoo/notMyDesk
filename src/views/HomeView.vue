@@ -21,6 +21,7 @@
 import JsonFloors from "@/data/floors.json";
 import { initWeeklyEmptyFloorsBy, getFloorsBy } from "@/share/SeatManager";
 import { getCurrentDate } from "@/share/DateManager";
+import { loadData } from "@/share/LocalStorageManager";
 import SideNavItemComponent from "@/components/SideNavItem.vue";
 import SideNavComponent from "@/components/SideNav.vue";
 import FloorComponent from "@/components/Floor.vue";
@@ -62,11 +63,9 @@ export default {
     },
   },
   created() {
-    // TODO: storage - if no storage then generate; save to storage
-    // TODO: storage - if storage exists then get weeklyFloors
     // TODO: storage - if storage exists then delete old one
-    // create this week floors based on floor index
-    this.weeklyFloors = initWeeklyEmptyFloorsBy([3, 4, 5]);
+    // load data from LocalStorage otherwise generate
+    this.weeklyFloors = loadData();
 
     // default: get today date
     let todayFullDate = getCurrentDate().fullDate;
