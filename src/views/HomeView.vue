@@ -2,7 +2,7 @@
   <div class="container">
     <SideNav>
       <SideNavItem
-        v-for="floor in floors"
+        v-for="floor in selectDayfloors"
         :key="floor.id"
         :floorInfo="floor"
         :selectedFloor="currentFloor"
@@ -33,7 +33,8 @@ export default {
   },
   data() {
     return {
-      floors: JsonFloors,
+      weeklyFloors: null,
+      selectDayfloors: null,
       currentFloor: null,
     };
   },
@@ -41,30 +42,43 @@ export default {
     switchFloor(floorInfo) {
       this.currentFloor = floorInfo;
     },
-    getSortedFloors(theDayFloors) {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      return theDayFloors.sort((a, b) => (a.id < b.id ? 1 : -1));
+
+    // get selected-date floors descending
+    getSelectDayFloors(weeklyFloors, selectedDate) {
+      // get selected-date floors
+      let selectDayFloors = getFloorsBy(weeklyFloors, selectedDate);
+      // sort floors descending
+      let sortedFloors = selectDayFloors.sort((a, b) => (a.id < b.id ? 1 : -1));
+      return sortedFloors;
     },
-    // get selected-date from Floor
+
+    // get selected-date from FloorView
     getSelectedDate(theDate) {
-      console.log(`📆 ${theDate.fullDate}`);
-      // TODO: based on selected-date to load corresponding floors
+      // based on selected-date to load corresponding day floors from weeklyFloors
+      this.selectDayfloors = this.getSelectDayFloors(
+        this.weeklyFloors,
+        theDate.fullDate
+      );
     },
   },
   created() {
+    // TODO: storage - if no storage then generate; save to storage
+    // TODO: storage - if storage exists then get weeklyFloors
+    // TODO: storage - if storage exists then delete old one
     // create this week floors based on floor index
-    let weeklyFloors = initWeeklyEmptyFloorsBy([3, 4, 5]);
+    this.weeklyFloors = initWeeklyEmptyFloorsBy([3, 4, 5]);
 
-    // get current day floors
+    // default: get today date
     let todayFullDate = getCurrentDate().fullDate;
-    let todayFloors = getFloorsBy(weeklyFloors, todayFullDate);
 
-    // sort floors descending
-    let sortedFloors = this.getSortedFloors(todayFloors);
-    this.floors = sortedFloors;
+    // get selected-date floors descending
+    this.selectDayfloors = this.getSelectDayFloors(
+      this.weeklyFloors,
+      todayFullDate
+    );
 
-    // active 3rd floor as default
-    this.currentFloor = sortedFloors.filter((x) => x.id === 3);
+    // default: active 3rd floor
+    this.currentFloor = this.selectDayfloors.filter((x) => x.id === 3);
   },
 };
 </script>
