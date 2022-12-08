@@ -37,7 +37,7 @@
           <v-btn
             color="primary"
             block
-            @click="dialog = false"
+            @click="saveAndClose()"
           >
             Save Close
           </v-btn>
@@ -59,6 +59,14 @@ export default {
   computed: {
     // if seat-occupied is null => Empty
     // if seat-occupied is 'Tom' => ocuppiedBy = 'Tom'
+  },
+  methods: {
+    saveAndClose() {
+      // vuetify close popup
+      this.dialog = false;
+      // TODO: set data to store
+      console.log(this.seat);
+    },
   },
 };
 </script>

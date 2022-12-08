@@ -7,8 +7,10 @@ function createNewFloorBy(floorId, floorName, fullDate) {
     let newSeats = []
     for (let i = 1; i < 33; i++) {
         const newSeat = {
-            "deskNr": i,
-            "occupiedBy": ""
+            deskNr: i,
+            occupiedBy: "",
+            floorId: floorId,
+            fullDate: fullDate
         }
         newSeats.push(newSeat)
     }

@@ -64,6 +64,7 @@ export default {
   },
   created() {
     // TODO: storage - if storage exists then delete old one
+
     // load data from LocalStorage otherwise generate
     this.weeklyFloors = loadData();
 
