@@ -47,7 +47,9 @@
   </div>
 </template>
   
-  <script>
+<script>
+import { getFloorBy, setOccupyToSeatBy } from "@/share/SeatManager";
+
 export default {
   props: ["seat"],
   data() {
@@ -64,8 +66,30 @@ export default {
     saveAndClose() {
       // vuetify close popup
       this.dialog = false;
+
       // TODO: set data to store
-      console.log(this.seat);
+
+      // get selected-seat
+      let selectedSeat = this.seat;
+      console.log(selectedSeat);
+
+      // get store-data-weeklyFloors
+      let weeklyFloors = this.$store.state.weeklyFloors;
+      console.log(weeklyFloors);
+
+      // get target-floor
+      let floor = getFloorBy(
+        weeklyFloors,
+        selectedSeat.floorId,
+        selectedSeat.fullDate
+      );
+      console.log(floor);
+
+      // set occupy to target-seat
+      setOccupyToSeatBy(floor, selectedSeat, this.occupiedBy);
+      console.log(this.$store.state.weeklyFloors);
+
+      // TODO: notify FloorView weeklyFloors changed
     },
   },
 };

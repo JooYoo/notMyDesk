@@ -87,6 +87,14 @@ function getFloorsBy(floors, fullDate) {
     return currentDateFloors
 }
 
+// set seat by occupiedBy
+function setOccupyToSeatBy(floor, selectedSeat, newOccupiedBy) {
+    // find target seat
+    let seat = floor.seats.find((x) => x.deskNr === selectedSeat.deskNr);
+    // set occupy
+    seat.occupiedBy = newOccupiedBy
+}
+
 // group seats based on each-group-count for UI
 function gatherGroups(seats, eachGroupCounts) {
     let groups = [];
@@ -124,5 +132,6 @@ export {
     initWeeklyEmptyFloorsBy,
     getFloorBy,
     getFloorsBy,
+    setOccupyToSeatBy,
     gatherGroups
 }
