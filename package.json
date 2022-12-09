@@ -12,7 +12,8 @@
   "dependencies": {
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
-    "vuetify": "^3.0.3"
+    "vuetify": "^3.0.3",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@mdi/font": "^7.0.96",

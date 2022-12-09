@@ -63,8 +63,8 @@ export default {
   created() {
     // TODO: storage - if storage exists then delete old one
 
-    // load data from LocalStorage otherwise generate
-    this.weeklyFloors = loadData();
+    // load data from store
+    this.weeklyFloors = this.$store.state.weeklyFloors;
 
     // default: get today date
     let todayFullDate = getCurrentDate().fullDate;
