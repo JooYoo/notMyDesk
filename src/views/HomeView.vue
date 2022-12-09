@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import JsonFloors from "@/data/floors.json";
 import { initWeeklyEmptyFloorsBy, getFloorsBy } from "@/share/SeatManager";
 import { getCurrentDate } from "@/share/DateManager";
 import { loadData } from "@/share/LocalStorageManager";
@@ -40,10 +39,10 @@ export default {
     };
   },
   methods: {
+    // switch floor and send selected-floor as current-floor
     switchFloor(floorInfo) {
       this.currentFloor = floorInfo;
     },
-
     // get selected-date floors descending
     getSelectDayFloors(weeklyFloors, selectedDate) {
       // get selected-date floors
@@ -52,7 +51,6 @@ export default {
       let sortedFloors = selectDayFloors.sort((a, b) => (a.id < b.id ? 1 : -1));
       return sortedFloors;
     },
-
     // get selected-date from FloorView
     getSelectedDate(theDate) {
       // based on selected-date to load corresponding day floors from weeklyFloors
