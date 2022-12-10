@@ -34,7 +34,7 @@ export default {
   methods: {
     switchDay(dayInfo) {
       this.currentDate = dayInfo;
-      // emit selected-date to Floor
+      // emit selected-date to HomeView
       this.$emit("selectedDate", dayInfo);
     },
   },

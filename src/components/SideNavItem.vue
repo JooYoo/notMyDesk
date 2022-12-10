@@ -28,7 +28,7 @@ export default {
     },
   },
   mounted() {
-    this.setState(this.selectedFloor[0]);
+    this.setState(this.selectedFloor);
   },
 };
 </script>
