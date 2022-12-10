@@ -69,8 +69,6 @@ export default {
       this.dialog = false;
       // set data to store
       this.setNewOccupy(this.seat);
-
-      console.log(this.$store.state.weeklyFloors);
     },
     setNewOccupy(selectedSeat) {
       // get store-data-weeklyFloors
