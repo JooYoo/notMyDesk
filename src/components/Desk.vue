@@ -8,14 +8,15 @@
         <v-btn
           color="primary"
           v-bind="props"
-        > {{seat.deskNr}} {{seat.occupied}} </v-btn>
+        > {{seat.deskNr}}. {{seat.occupiedBy}} </v-btn>
       </template>
 
       <v-card>
         <v-card-item>
-          <v-card-title>{{seat.occupied}}</v-card-title>
+          <v-card-title>{{occupiedBy}}</v-card-title>
           <v-card-subtitle>
-            <span class="mr-1">{{seat.date}}</span>
+            <span class="mr-1">{{seat.fullDate}}</span>
+            <!-- TODO:  change icon and color based on occupy-->
             <v-icon
               color="error"
               icon="mdi-fire-circle"
@@ -48,7 +49,7 @@
 </template>
   
 <script>
-import { getFloorBy, setOccupyToSeatBy } from "@/share/SeatManager";
+import { getFloorBy, setOccupyToStore } from "@/share/SeatManager";
 
 export default {
   props: ["seat"],
@@ -66,30 +67,22 @@ export default {
     saveAndClose() {
       // vuetify close popup
       this.dialog = false;
+      // set data to store
+      this.setNewOccupy(this.seat);
 
-      // TODO: set data to store
-
-      // get selected-seat
-      let selectedSeat = this.seat;
-      console.log(selectedSeat);
-
+      console.log(this.$store.state.weeklyFloors);
+    },
+    setNewOccupy(selectedSeat) {
       // get store-data-weeklyFloors
       let weeklyFloors = this.$store.state.weeklyFloors;
-      console.log(weeklyFloors);
-
       // get target-floor
       let floor = getFloorBy(
         weeklyFloors,
         selectedSeat.floorId,
         selectedSeat.fullDate
       );
-      console.log(floor);
-
       // set occupy to target-seat
-      setOccupyToSeatBy(floor, selectedSeat, this.occupiedBy);
-      console.log(this.$store.state.weeklyFloors);
-
-      // TODO: notify FloorView weeklyFloors changed
+      setOccupyToStore(floor, selectedSeat, this.occupiedBy);
     },
   },
 };

@@ -88,11 +88,12 @@ function getFloorsBy(floors, fullDate) {
 }
 
 // set seat by occupiedBy
-function setOccupyToSeatBy(floor, selectedSeat, newOccupiedBy) {
+function setOccupyToStore(floor, selectedSeat, newOccupiedBy) {
     // find target seat
     let seat = floor.seats.find((x) => x.deskNr === selectedSeat.deskNr);
     // set occupy
     seat.occupiedBy = newOccupiedBy
+    // TODO: save to storage
 }
 
 // group seats based on each-group-count for UI
@@ -132,6 +133,6 @@ export {
     initWeeklyEmptyFloorsBy,
     getFloorBy,
     getFloorsBy,
-    setOccupyToSeatBy,
+    setOccupyToStore,
     gatherGroups
 }
