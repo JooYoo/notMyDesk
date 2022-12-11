@@ -6,7 +6,7 @@
     >
       <template v-slot:activator="{ props }">
         <v-btn
-          color="primary"
+          :color="deskColor(seat.floorId)"
           v-bind="props"
         > {{seat.deskNr}}. {{seat.occupiedBy}} </v-btn>
       </template>
@@ -16,10 +16,9 @@
           <v-card-title>{{occupiedBy}}</v-card-title>
           <v-card-subtitle>
             <span class="mr-1">{{seat.fullDate}}</span>
-            <!-- TODO:  change icon and color based on occupy-->
             <v-icon
-              color="error"
-              icon="mdi-fire-circle"
+              :color="deskModalIconColor(seat.occupiedBy)"
+              :icon="deskModalIcon(seat.occupiedBy)"
               size="small"
             ></v-icon>
           </v-card-subtitle>
@@ -63,6 +62,50 @@ export default {
   computed: {
     // if seat-occupied is null => Empty
     // if seat-occupied is 'Tom' => ocuppiedBy = 'Tom'
+
+    // change icon based on
+    deskModalIcon() {
+      return (occupiedBy) => {
+        let icon = "";
+        if (occupiedBy) {
+          icon = "mdi-stop-circle";
+        } else {
+          icon = "mdi-play-circle";
+        }
+        return icon;
+      };
+    },
+    deskModalIconColor() {
+      return (occupiedBy) => {
+        let color = "";
+        if (occupiedBy) {
+          color = "red";
+        } else {
+          color = "green";
+        }
+        return color;
+      };
+    },
+    // change desk-color based on floorId
+    deskColor() {
+      return function (floorId) {
+        let deskColor = "";
+        switch (floorId) {
+          case 3:
+            deskColor = "indigo darken-1";
+            break;
+          case 4:
+            deskColor = "teal darken-1";
+            break;
+          case 5:
+            deskColor = "purple darken-1";
+            break;
+          default:
+            break;
+        }
+        return deskColor;
+      };
+    },
   },
   methods: {
     saveAndClose() {
@@ -82,7 +125,7 @@ export default {
       );
       // set occupy to target-seat
       setOccupyToStore(floor, selectedSeat, this.occupiedBy);
-      // TODO: save new-weeklyFloors to LocalStorage
+      // save new-weeklyFloors to LocalStorage
       saveData(weeklyFloors);
     },
   },
