@@ -13,7 +13,7 @@
 
       <v-card>
         <v-card-item>
-          <v-card-title>{{occupiedBy}}</v-card-title>
+          <v-card-title>{{deskModalTitle(seat, occupiedBy)}}</v-card-title>
           <v-card-subtitle>
             <span class="mr-1">{{seat.fullDate}}</span>
             <v-icon
@@ -60,9 +60,20 @@ export default {
     };
   },
   computed: {
-    // if seat-occupied is null => Empty
-    // if seat-occupied is 'Tom' => ocuppiedBy = 'Tom'
-
+    // display desk-modal-title
+    deskModalTitle() {
+      return (seat, vModelText) => {
+        let displayText = "";
+        if (vModelText) {
+          displayText = vModelText;
+        } else if (seat.occupiedBy) {
+          displayText = seat.occupiedBy;
+        } else {
+          displayText = "Empty";
+        }
+        return displayText;
+      };
+    },
     // change icon based on
     deskModalIcon() {
       return (occupiedBy) => {
