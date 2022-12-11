@@ -5,7 +5,7 @@ import { getWeekDates } from "@/share/DateManager";
 function loadData() {
     let weeklyFloors = null
     // if data is out of date then clean up localStorage
-    cleanDate()
+    cleanData()
     // try to load data from localStorage
     const storageWeeklyFloors = localStorage.getItem("weeklyFloors")
     // if no data in storage then generate 
@@ -26,10 +26,9 @@ function saveData(dataToSave) {
 }
 
 // TODO: storage - if storage exists then delete old data
-function cleanDate() {
+function cleanData() {
     // try to load data from localStorage
     const storageWeeklyFloors = localStorage.getItem("weeklyFloors")
-
     // if data exists then handle data
     if (storageWeeklyFloors) {
         let weeklyFloors = JSON.parse(storageWeeklyFloors)
@@ -39,8 +38,13 @@ function cleanDate() {
 
         /**
          * TODO: check when new week statrs
-         * shouldCleanStorage = true
+         * 
+         * weeklyFloors should contains 21 items, 
+         * starts from current week Monday
+         * 
+         * shouldCleanStorage should be true
          **/
+        console.log(weeklyFloors);
         console.log(`shouldCleanStorage: ${shouldCleanStorage}`);
         // clean up localStorage
         if (shouldCleanStorage) {
