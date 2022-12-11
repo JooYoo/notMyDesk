@@ -73,11 +73,8 @@ export default {
     },
   },
   created() {
-    // TODO: storage - if storage exists then delete old one
-
     // load data from store
     this.weeklyFloors = this.$store.state.weeklyFloors;
-    console.log(this.weeklyFloors.length);
 
     // default: get today date
     let todayFullDate = getCurrentDate().fullDate;
