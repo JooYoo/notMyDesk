@@ -50,6 +50,7 @@
   
 <script>
 import { getFloorBy, setOccupyToStore } from "@/share/SeatManager";
+import { saveData } from "@/share/LocalStorageManager";
 
 export default {
   props: ["seat"],
@@ -81,6 +82,8 @@ export default {
       );
       // set occupy to target-seat
       setOccupyToStore(floor, selectedSeat, this.occupiedBy);
+      // TODO: save new-weeklyFloors to LocalStorage
+      saveData(weeklyFloors);
     },
   },
 };
