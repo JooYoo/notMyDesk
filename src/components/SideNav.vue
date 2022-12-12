@@ -14,6 +14,6 @@ export default {};
   flex-direction: column;
   height: 100%;
   width: fit-content;
-  border: 4px solid darkgray;
+  border: 1px solid black;
 }
 </style>

@@ -36,16 +36,6 @@ function cleanData() {
         // if data out of date then clean up localStorage
         let shouldCleanStorage = isWeeklyFloorOutOfDate(weeklyFloors)
 
-        /**
-         * TODO: check when new week statrs
-         * 
-         * weeklyFloors should contains 21 items, 
-         * starts from current week Monday
-         * 
-         * shouldCleanStorage should be true
-         **/
-        console.log(weeklyFloors);
-        console.log(`shouldCleanStorage: ${shouldCleanStorage}`);
         // clean up localStorage
         if (shouldCleanStorage) {
             localStorage.clear()

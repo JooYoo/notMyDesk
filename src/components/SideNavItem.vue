@@ -38,10 +38,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 56px;
+  height: 80px;
   width: 100%;
   padding: 8px;
-  border-bottom: 2px solid gray;
+  border-bottom: 1px solid black;
+  white-space: nowrap;
   cursor: pointer;
 
   &:hover {
