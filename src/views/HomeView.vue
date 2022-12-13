@@ -75,6 +75,7 @@ export default {
   created() {
     // load data from store
     this.weeklyFloors = this.$store.state.weeklyFloors;
+    console.log(this.weeklyFloors);
 
     // default: get today date
     let todayFullDate = getCurrentDate().fullDate;

@@ -93,7 +93,6 @@ function setOccupyToStore(floor, selectedSeat, newOccupiedBy) {
     let seat = floor.seats.find((x) => x.deskNr === selectedSeat.deskNr);
     // set occupy
     seat.occupiedBy = newOccupiedBy
-    // TODO: save to storage
 }
 
 // group seats based on each-group-count for UI
@@ -129,10 +128,66 @@ function gatherGroups(seats, eachGroupCounts) {
     return groups;
 }
 
+// generate new seats x 32
+function createSeats(floorId, floorName, fullDate) {
+    // create seats for one floor
+    let newSeats = []
+    for (let i = 1; i < 33; i++) {
+        const newSeat = {
+            deskNr: i,
+            occupiedBy: "",
+            floorId: floorId,
+            floorName: floorName,
+            fullDate: fullDate
+        }
+        newSeats.push(newSeat)
+    }
+    return newSeats
+}
+// generate empty Floors for the whole week
+// - param: floorNrArray => e.g. [3,4,5]
+function generateWeeklyEmptyFloorsBy(floorNrArray) {
+    // get current week dates
+    let currentWeekDates = getWeekDays()
+
+    let weeklyFloors = []
+
+    // iterate week-dates: 7 days
+    currentWeekDates.forEach(currDate => {
+        let newFloors = []
+        let currFullDate = currDate.fullDate
+
+        let newWeeklyFloor = {
+            fullDate: currFullDate,
+            floors: newFloors
+        }
+
+        // iterate floors: 3 floors
+        floorNrArray.forEach(floorNr => {
+            let floorId = floorNr
+            let floorName = getFloorNameEn(floorNr)
+            // iterate seats: 32 seats
+            let newSeats = createSeats(floorId, floorName, currFullDate)
+
+            let newFloor = {
+                id: floorId,
+                floorName: floorName,
+                fullDate: currFullDate,
+                seats: newSeats
+            }
+            newFloors.push(newFloor)
+        })
+        weeklyFloors.push(newWeeklyFloor)
+    })
+
+    return weeklyFloors
+}
+
 export {
     initWeeklyEmptyFloorsBy,
     getFloorBy,
     getFloorsBy,
     setOccupyToStore,
-    gatherGroups
+    gatherGroups,
+    generateWeeklyEmptyFloorsBy
 }
