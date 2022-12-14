@@ -18,11 +18,7 @@
 </template>
 
 <script>
-import {
-  initWeeklyEmptyFloorsBy,
-  getFloorsBy,
-  getFloorBy,
-} from "@/share/SeatManager";
+import { getFloorsBy, generateWeeklyEmptyFloorsBy } from "@/share/SeatManager";
 import { getCurrentDate } from "@/share/DateManager";
 import { loadData } from "@/share/LocalStorageManager";
 import SideNavItemComponent from "@/components/SideNavItem.vue";
@@ -49,10 +45,12 @@ export default {
     switchFloor(floorInfo) {
       this.currentFloor = floorInfo;
     },
+    // TODO: remove when new data-structure works
     // get selected-date floors descending
     getSelectDayFloors(weeklyFloors, selectedDate) {
       // get selected-date floors
       let selectDayFloors = getFloorsBy(weeklyFloors, selectedDate);
+      console.log(selectDayFloors);
       // sort floors descending
       let sortedFloors = selectDayFloors.sort((a, b) => (a.id < b.id ? 1 : -1));
       return sortedFloors;
@@ -74,7 +72,9 @@ export default {
   },
   created() {
     // load data from store
+    // TODO: uncomment after new data-structure is conformed
     this.weeklyFloors = this.$store.state.weeklyFloors;
+    // this.weeklyFloors = generateWeeklyEmptyFloorsBy([3, 4, 5]);
     console.log(this.weeklyFloors);
 
     // default: get today date

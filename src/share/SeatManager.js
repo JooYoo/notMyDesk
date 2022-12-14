@@ -148,7 +148,7 @@ function createSeats(floorId, floorName, fullDate) {
 // - param: floorNrArray => e.g. [3,4,5]
 function generateWeeklyEmptyFloorsBy(floorNrArray) {
     // get current week dates
-    let currentWeekDates = getWeekDays()
+    let currentWeekDates = getWeekDates()
 
     let weeklyFloors = []
 

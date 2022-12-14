@@ -25,7 +25,7 @@ function saveData(dataToSave) {
     localStorage.setItem("weeklyFloors", JSON.stringify(dataToSave))
 }
 
-// TODO: storage - if storage exists then delete old data
+// storage - if storage exists then delete old data
 function cleanData() {
     // try to load data from localStorage
     const storageWeeklyFloors = localStorage.getItem("weeklyFloors")
