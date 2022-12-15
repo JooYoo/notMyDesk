@@ -76,15 +76,18 @@ function initWeeklyEmptyFloorsBy(floorNrArray) {
 }
 
 // get seats by floorId and fullDate
-function getFloorBy(floors, floorId, fullDate) {
-    let floor = floors.filter(x => x.id === floorId && x.date === fullDate)
-    return floor[0]
+function getFloorBy(weeklyDateObjs, floorId, fullDate) {
+    // get date-obj
+    let dateObj = weeklyDateObjs.find(x => x.fullDate == fullDate)
+    let selectedFloor = dateObj.floors.find(x => x.id == floorId)
+    return selectedFloor
 }
 
 // get floors by fullDate
 function getFloorsBy(floors, fullDate) {
-    let currentDateFloors = floors.filter(x => x.date === fullDate)
-    return currentDateFloors
+    let currDateObj = floors.find(x => x.fullDate === fullDate)
+    let currDateFloors = currDateObj.floors
+    return currDateFloors
 }
 
 // set seat by occupiedBy

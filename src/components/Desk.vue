@@ -8,7 +8,12 @@
         <v-btn
           :color="deskColor(seat.floorId)"
           v-bind="props"
-        > {{seat.deskNr}}. {{seat.occupiedBy}} </v-btn>
+        >
+          <span class="desk-txt">
+            {{seat.deskNr}}.
+          </span>
+          {{seat.occupiedBy}}
+        </v-btn>
       </template>
 
       <v-card>
@@ -124,24 +129,30 @@ export default {
       this.dialog = false;
       // set data to store
       this.setNewOccupy(this.seat);
+      // clean up text-box
+      this.occupiedBy = "";
     },
     setNewOccupy(selectedSeat) {
       // get store-data-weeklyFloors
-      let weeklyFloors = this.$store.state.weeklyFloors;
+      let weeklyDateObjs = this.$store.state.weeklyFloors;
       // get target-floor
       let floor = getFloorBy(
-        weeklyFloors,
+        weeklyDateObjs,
         selectedSeat.floorId,
         selectedSeat.fullDate
       );
       // set occupy to target-seat
       setOccupyToStore(floor, selectedSeat, this.occupiedBy);
       // save new-weeklyFloors to LocalStorage
-      saveData(weeklyFloors);
+      saveData(weeklyDateObjs);
     },
   },
 };
 </script>
   
-  <style>
+<style lang="scss" scoped>
+.desk-txt {
+  font-size: 10px;
+  opacity: 0.5;
+}
 </style>
