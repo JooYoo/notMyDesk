@@ -1,4 +1,4 @@
-import { initWeeklyEmptyFloorsBy, generateWeeklyEmptyFloorsBy } from "@/share/SeatManager";
+import { generateWeeklyEmptyFloorsBy } from "@/share/SeatManager";
 import { getWeekDates } from "@/share/DateManager";
 
 // storage - load data from LocalStorage

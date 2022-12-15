@@ -18,9 +18,8 @@
 </template>
 
 <script>
-import { getFloorsBy, generateWeeklyEmptyFloorsBy } from "@/share/SeatManager";
+import { getFloorsBy } from "@/share/SeatManager";
 import { getCurrentDate } from "@/share/DateManager";
-import { loadData } from "@/share/LocalStorageManager";
 import SideNavItemComponent from "@/components/SideNavItem.vue";
 import SideNavComponent from "@/components/SideNav.vue";
 import FloorComponent from "@/components/Floor.vue";

@@ -1,29 +1,5 @@
 import { getWeekDates } from "./DateManager.js";
 
-// create empty seats for floor and date
-// e.g. (3, "3rd Floor", "2022-11-12")
-function createNewFloorBy(floorId, floorName, fullDate) {
-    // create seats for one floor
-    let newSeats = []
-    for (let i = 1; i < 33; i++) {
-        const newSeat = {
-            deskNr: i,
-            occupiedBy: "",
-            floorId: floorId,
-            fullDate: fullDate
-        }
-        newSeats.push(newSeat)
-    }
-    // new Floor obj
-    const newFloor = {
-        id: floorId,
-        floorName: floorName,
-        date: fullDate,
-        seats: newSeats
-    }
-    return newFloor
-}
-
 // 1 => "1st Floor"
 function getFloorNameEn(nr) {
     let floorName = ""
@@ -48,31 +24,6 @@ function getFloorNameEn(nr) {
     }
 
     return floorName
-}
-
-// init empty floors for the whole week
-// floorNrArray => e.g. [3,4,5]
-function initWeeklyEmptyFloorsBy(floorNrArray) {
-    // each floor for each week-date
-    let floors = []
-
-    // get current week dates
-    let currentWeekDates = getWeekDates()
-
-    // iterate floors
-    floorNrArray.forEach(floorNr => {
-        let floorId = floorNr
-        let floorName = getFloorNameEn(floorNr)
-
-        currentWeekDates.forEach(weekDate => {
-            let fullDate = weekDate.fullDate
-            let newFloor = createNewFloorBy(floorId, floorName, fullDate)
-
-            floors.push(newFloor)
-        });
-    });
-
-    return floors
 }
 
 // get seats by floorId and fullDate
@@ -147,6 +98,7 @@ function createSeats(floorId, floorName, fullDate) {
     }
     return newSeats
 }
+
 // generate empty Floors for the whole week
 // - param: floorNrArray => e.g. [3,4,5]
 function generateWeeklyEmptyFloorsBy(floorNrArray) {
@@ -187,7 +139,6 @@ function generateWeeklyEmptyFloorsBy(floorNrArray) {
 }
 
 export {
-    initWeeklyEmptyFloorsBy,
     getFloorBy,
     getFloorsBy,
     setOccupyToStore,
