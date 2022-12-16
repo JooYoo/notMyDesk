@@ -1,21 +1,53 @@
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase/index";
+import { generateWeeklyEmptyFloorsBy } from "@/share/SeatManager";
+import { isObjEmpty } from "@/share/Util";
 
-// firestore - load data from Firestore
-async function loadDbData() {
-    let weeklyDateObjs = null
-    // TODO: if data is out of date then clean up localStorage
+// firebase - load data from Firestore
+async function fbLoadData() {
+    let fbWeeklyDateObjs = null
 
-    // try to load  data from firestore
+    // firestore - get querySnapshop (collection) from Firebase
     const querySnapshot = await getDocs(collection(db, "weeklyDateObjs"));
+    // firestore - iterate docs in collection
     querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        fbWeeklyDateObjs = doc.data()
     });
 
+    return fbWeeklyDateObjs
+}
+
+// db - load data logic
+async function loadWeeklyDateObjs() {
+    let weeklyDateObjs = null
+    // TODO: if data is out of date then clean up localStorage
+    fbCleanData()
+
+    // try to load data from firestore
+    const fbWeeklyDateObjs = await fbLoadData()
+
     // TODO: if no data in DB then generate
+    if (isObjEmpty(fbWeeklyDateObjs)) {
+        weeklyDateObjs = generateWeeklyEmptyFloorsBy([3, 4, 5])
+        // save new generated data to firestore
+        fbSaveData(weeklyDateObjs)
+    } else {
+        // if data exists then get data from LocalStorage
+        weeklyDateObjs = fbWeeklyDateObjs
+    }
+
+    console.log(weeklyDateObjs);
+    return weeklyDateObjs
+}
+
+function fbSaveData(weeklyDateObjs) {
+
+}
+
+function fbCleanData() {
+
 }
 
 export {
-    loadDbData
+    loadWeeklyDateObjs
 }
