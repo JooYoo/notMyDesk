@@ -20,6 +20,7 @@
 <script>
 import { getFloorsBy } from "@/share/SeatManager";
 import { getCurrentDate } from "@/share/DateManager";
+import { loadDbData } from "@/firebase/FirestoreManager";
 import SideNavItemComponent from "@/components/SideNavItem.vue";
 import SideNavComponent from "@/components/SideNav.vue";
 import FloorComponent from "@/components/Floor.vue";
@@ -67,6 +68,9 @@ export default {
         (x) => x.id === currentFloorId
       );
     },
+  },
+  async mounted() {
+    await loadDbData();
   },
   created() {
     // load data from store
