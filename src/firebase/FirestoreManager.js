@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 import { db } from "@/firebase/index";
 import { generateWeeklyEmptyFloorsBy } from "@/share/SeatManager";
 import { isObjEmpty } from "@/share/Util";
@@ -21,6 +21,22 @@ function fbRealTimeLoadData() {
     })
 }
 
+function fbCleanData() {
+
+}
+
+function fbSaveData(weeklyDateObjs) {
+    // iterate generated-weekly-objs
+    weeklyDateObjs.forEach(obj => {
+        // save objs one by one ( 7 in total)
+        addDoc(collection(db, 'weeklyDateObjs'), {
+            fullDate: obj.fullDate,
+            floors: obj.floors
+        })
+    })
+}
+
+// FIXME: get all the docs
 // firebase - load data from Firestore
 async function fbLoadData() {
     let fbWeeklyDateObjs = null
@@ -44,7 +60,7 @@ async function loadWeeklyDateObjs() {
     // try to load data from firestore
     const fbWeeklyDateObjs = await fbLoadData()
 
-    // TODO: if no data in DB then generate
+    // if no data in DB then generate
     if (isObjEmpty(fbWeeklyDateObjs)) {
         weeklyDateObjs = generateWeeklyEmptyFloorsBy([3, 4, 5])
         // save new generated data to firestore
@@ -54,16 +70,10 @@ async function loadWeeklyDateObjs() {
         weeklyDateObjs = fbWeeklyDateObjs
     }
 
-    console.log(weeklyDateObjs);
+    // TODO: get all the documents (now only got the last one)
+    console.log(fbWeeklyDateObjs);
+
     return weeklyDateObjs
-}
-
-function fbSaveData(weeklyDateObjs) {
-
-}
-
-function fbCleanData() {
-
 }
 
 export {
