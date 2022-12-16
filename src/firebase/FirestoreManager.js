@@ -3,6 +3,24 @@ import { db } from "@/firebase/index";
 import { generateWeeklyEmptyFloorsBy } from "@/share/SeatManager";
 import { isObjEmpty } from "@/share/Util";
 
+// firebase - load data (real-time) from Firestore
+function fbRealTimeLoadData() {
+    // create a promise 
+    return new Promise((resolve, reject) => {
+        // listen to docs from Firestore
+        onSnapshot(collection(db, 'weeklyDateObjs'), (querySnapshot) => {
+            let fbWeeklyDateObjs = null
+
+            querySnapshot.forEach((doc) => {
+                fbWeeklyDateObjs = doc.data()
+            });
+
+            // output the data from Firestore
+            resolve(fbWeeklyDateObjs)
+        })
+    })
+}
+
 // firebase - load data from Firestore
 async function fbLoadData() {
     let fbWeeklyDateObjs = null
