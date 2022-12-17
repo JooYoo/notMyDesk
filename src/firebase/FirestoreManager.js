@@ -36,16 +36,15 @@ function fbSaveData(weeklyDateObjs) {
     })
 }
 
-// FIXME: get all the docs
 // firebase - load data from Firestore
 async function fbLoadData() {
-    let fbWeeklyDateObjs = null
+    let fbWeeklyDateObjs = []
 
     // firestore - get querySnapshop (collection) from Firebase
     const querySnapshot = await getDocs(collection(db, "weeklyDateObjs"));
     // firestore - iterate docs in collection
     querySnapshot.forEach((doc) => {
-        fbWeeklyDateObjs = doc.data()
+        fbWeeklyDateObjs.push(doc.data())
     });
 
     return fbWeeklyDateObjs
@@ -69,9 +68,6 @@ async function loadWeeklyDateObjs() {
         // if data exists then get data from LocalStorage
         weeklyDateObjs = fbWeeklyDateObjs
     }
-
-    // TODO: get all the documents (now only got the last one)
-    console.log(fbWeeklyDateObjs);
 
     return weeklyDateObjs
 }
