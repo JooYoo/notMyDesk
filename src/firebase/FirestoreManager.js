@@ -69,6 +69,7 @@ async function cleanUpWeeklyDateObjs() {
     if (!isObjEmpty(fbWeeklyDateObjs)) {
         // check if dates out of date
         let shouldCleanStorage = isWeeklyFloorOutOfDate(fbWeeklyDateObjs)
+        // FIXME: delete next week
         console.log(shouldCleanStorage);
         // clean up db docs
         if (shouldCleanStorage) {
