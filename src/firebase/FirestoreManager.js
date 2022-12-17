@@ -1,6 +1,7 @@
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, doc, deleteDoc } from "firebase/firestore";
 import { db } from "@/firebase/index";
 import { generateWeeklyEmptyFloorsBy } from "@/share/SeatManager";
+import { isWeeklyFloorOutOfDate } from "@/share/DateManager";
 import { isObjEmpty } from "@/share/Util";
 
 // firebase - load data (real-time) from Firestore
@@ -21,10 +22,7 @@ function fbRealTimeLoadData() {
     })
 }
 
-function fbCleanData() {
-
-}
-
+// firebase - save data into Firestore
 function fbSaveData(weeklyDateObjs) {
     // iterate generated-weekly-objs
     weeklyDateObjs.forEach(obj => {
@@ -44,17 +42,48 @@ async function fbLoadData() {
     const querySnapshot = await getDocs(collection(db, "weeklyDateObjs"));
     // firestore - iterate docs in collection
     querySnapshot.forEach((doc) => {
-        fbWeeklyDateObjs.push(doc.data())
+        const newObj = {
+            id: doc.id,
+            fullDate: doc.data().fullDate,
+            floors: doc.data().floors
+        }
+        fbWeeklyDateObjs.push(newObj)
     });
 
     return fbWeeklyDateObjs
 }
 
+// firebase - delete documents in Firestore
+function fbDeleteObjs(fbWeeklyDateObjs) {
+    fbWeeklyDateObjs.forEach(obj => {
+        deleteDoc(doc(collection(db, "weeklyDateObjs"), obj.id))
+    })
+}
+
+// db - clean data logic
+async function cleanUpWeeklyDateObjs() {
+    // get data from Firebase
+    const fbWeeklyDateObjs = await fbLoadData()
+
+    // if data exists then start clean-up-process
+    if (!isObjEmpty(fbWeeklyDateObjs)) {
+        // check if dates out of date
+        let shouldCleanStorage = isWeeklyFloorOutOfDate(fbWeeklyDateObjs)
+        console.log(shouldCleanStorage);
+        // clean up db docs
+        if (shouldCleanStorage) {
+            fbDeleteObjs(fbWeeklyDateObjs)
+            console.log("deleteStorage");
+        }
+    }
+}
+
 // db - load data logic
 async function loadWeeklyDateObjs() {
     let weeklyDateObjs = null
-    // TODO: if data is out of date then clean up localStorage
-    fbCleanData()
+
+    // if data is out of date then clean up localStorage
+    await cleanUpWeeklyDateObjs()
 
     // try to load data from firestore
     const fbWeeklyDateObjs = await fbLoadData()

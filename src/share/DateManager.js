@@ -65,7 +65,30 @@ function getCurrentDate() {
     return currDateInfo
 }
 
+// check if storage-data is out of date
+function isWeeklyFloorOutOfDate(weeklyFloors) {
+    let isOutOfDate = false
+
+    // get storage-weekly-oldest-date. e.g. 2022-12-05
+    let storageFirstDate = weeklyFloors[0].fullDate
+    // get current-weekly-dates
+    let currentWeekDates = getWeekDates()
+    // get current-weekly-first-date
+    let currentFirstDate = currentWeekDates[0].fullDate
+    /*
+     * if storage-weekly-first-date is not the same as
+     * current-weekly-first-date, it means the storage-date is
+     * out of date
+     */
+    if (storageFirstDate != currentFirstDate) {
+        isOutOfDate = true
+    }
+
+    return isOutOfDate
+}
+
 export {
     getWeekDates,
-    getCurrentDate
+    getCurrentDate,
+    isWeeklyFloorOutOfDate
 }
