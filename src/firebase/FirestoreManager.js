@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, doc, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase/index";
 import { generateWeeklyEmptyFloorsBy } from "@/share/SeatManager";
 import { isWeeklyFloorOutOfDate } from "@/share/DateManager";
@@ -60,6 +60,24 @@ function fbDeleteObjs(fbWeeklyDateObjs) {
     })
 }
 
+// TODO: firebase - update document in Firebase
+function fbUpdateObj(weeklyDateObjs, selectedSeat) {
+    // find selected-DateObj-Id
+    const selectedWeeklyDateObj = weeklyDateObjs.find(x => x.fullDate == selectedSeat.fullDate)
+    // selected-weekly-dateObj floors
+    const selectedObjFloors = selectedWeeklyDateObj.floors
+    // selected-weekly-dateObj id
+    const selectedObjId = selectedWeeklyDateObj.id
+
+    // new floors at the selected-date
+    console.log(weeklyDateObjs);
+    console.log(selectedObjId);
+    console.log(selectedObjFloors);
+
+    // update doc based on ID
+
+}
+
 // db - clean data logic
 async function cleanUpWeeklyDateObjs() {
     // get data from Firebase
@@ -68,9 +86,10 @@ async function cleanUpWeeklyDateObjs() {
     // if data exists then start clean-up-process
     if (!isObjEmpty(fbWeeklyDateObjs)) {
         // check if dates out of date
+        // FIXME: isWeeklyFloorOutOfDate 
         let shouldCleanStorage = isWeeklyFloorOutOfDate(fbWeeklyDateObjs)
         // FIXME: delete next week
-        console.log(shouldCleanStorage);
+        console.log(`shouldCleanStorage: ${shouldCleanStorage}`);
         // clean up db docs
         if (shouldCleanStorage) {
             fbDeleteObjs(fbWeeklyDateObjs)
@@ -103,5 +122,6 @@ async function loadWeeklyDateObjs() {
 }
 
 export {
-    loadWeeklyDateObjs
+    loadWeeklyDateObjs,
+    fbUpdateObj
 }

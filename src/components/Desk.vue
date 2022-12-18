@@ -55,6 +55,7 @@
 <script>
 import { getFloorBy, setOccupyToStore } from "@/share/SeatManager";
 import { saveData } from "@/share/LocalStorageManager";
+import { fbUpdateObj } from "@/firebase/FirestoreManager";
 
 export default {
   props: ["seat"],
@@ -144,7 +145,10 @@ export default {
       // set occupy to target-seat
       setOccupyToStore(floor, selectedSeat, this.occupiedBy);
       // save new-weeklyFloors to LocalStorage
-      saveData(weeklyDateObjs);
+      // saveData(weeklyDateObjs);
+
+      // TODO: update weeklyDateObjs
+      fbUpdateObj(weeklyDateObjs, selectedSeat);
     },
   },
 };
