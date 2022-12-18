@@ -69,11 +69,10 @@ function getCurrentDate() {
 function isWeeklyFloorOutOfDate(weeklyFloors) {
     let isOutOfDate = false
 
-    // FIXME: should 
-    // 1. sort weeklyFloors from old to new
-    // 2. get the oldest date
-    // get storage-weekly-oldest-date. e.g. 2022-12-05
-    let storageFirstDate = weeklyFloors[0].fullDate
+    // sort weekly-floors by date ascendly: old -> new 
+    const sortedDateObjs = weeklyFloors.sort((a, b) => (a.fullDate > b.fullDate) ? 1 : -1)
+    // get storage-weekly-oldest-date. e.g. 2022-12-05 Monday
+    let storageFirstDate = sortedDateObjs[0].fullDate
     // get current-weekly-dates
     let currentWeekDates = getWeekDates()
     // get current-weekly-first-date
