@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, onSnapshot, addDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase/index";
 import { generateWeeklyEmptyFloorsBy } from "@/share/SeatManager";
 import { isWeeklyFloorOutOfDate } from "@/share/DateManager";
@@ -10,10 +10,15 @@ function fbRealTimeLoadData() {
     return new Promise((resolve, reject) => {
         // listen to docs from Firestore
         onSnapshot(collection(db, 'weeklyDateObjs'), (querySnapshot) => {
-            let fbWeeklyDateObjs = null
+            let fbWeeklyDateObjs = []
 
             querySnapshot.forEach((doc) => {
-                fbWeeklyDateObjs = doc.data()
+                const newObj = {
+                    id: doc.id,
+                    fullDate: doc.data().fullDate,
+                    floors: doc.data().floors
+                }
+                fbWeeklyDateObjs.push(newObj)
             });
 
             // output the data from Firestore
