@@ -147,7 +147,7 @@ export default {
       // save new-weeklyFloors to LocalStorage
       // saveData(weeklyDateObjs);
 
-      // TODO: update weeklyDateObjs
+      // update weeklyDateObjs
       fbUpdateObj(weeklyDateObjs, selectedSeat);
     },
   },

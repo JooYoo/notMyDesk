@@ -60,22 +60,19 @@ function fbDeleteObjs(fbWeeklyDateObjs) {
     })
 }
 
-// TODO: firebase - update document in Firebase
+// firebase - update document in Firebase
 function fbUpdateObj(weeklyDateObjs, selectedSeat) {
-    // find selected-DateObj-Id
+    // find selected-DateObj based on selected-seat-fullDate
     const selectedWeeklyDateObj = weeklyDateObjs.find(x => x.fullDate == selectedSeat.fullDate)
     // selected-weekly-dateObj floors
     const selectedObjFloors = selectedWeeklyDateObj.floors
     // selected-weekly-dateObj id
     const selectedObjId = selectedWeeklyDateObj.id
 
-    // new floors at the selected-date
-    console.log(weeklyDateObjs);
-    console.log(selectedObjId);
-    console.log(selectedObjFloors);
-
-    // update doc based on ID
-
+    // update doc based on ID in Firestore
+    updateDoc(doc(collection(db, "weeklyDateObjs"), selectedObjId), {
+        floors: selectedObjFloors
+    })
 }
 
 // db - clean data logic
@@ -86,14 +83,10 @@ async function cleanUpWeeklyDateObjs() {
     // if data exists then start clean-up-process
     if (!isObjEmpty(fbWeeklyDateObjs)) {
         // check if dates out of date
-        // FIXME: isWeeklyFloorOutOfDate 
         let shouldCleanStorage = isWeeklyFloorOutOfDate(fbWeeklyDateObjs)
-        // FIXME: delete next week
-        console.log(`shouldCleanStorage: ${shouldCleanStorage}`);
         // clean up db docs
         if (shouldCleanStorage) {
             fbDeleteObjs(fbWeeklyDateObjs)
-            console.log("deleteStorage");
         }
     }
 }

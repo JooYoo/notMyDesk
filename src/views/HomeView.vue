@@ -20,7 +20,6 @@
 <script>
 import { getFloorsBy } from "@/share/SeatManager";
 import { getCurrentDate } from "@/share/DateManager";
-import { loadWeeklyDateObjs } from "@/firebase/FirestoreManager";
 import SideNavItemComponent from "@/components/SideNavItem.vue";
 import SideNavComponent from "@/components/SideNav.vue";
 import FloorComponent from "@/components/Floor.vue";
@@ -68,10 +67,6 @@ export default {
         (x) => x.id === currentFloorId
       );
     },
-  },
-  // TODO: for testing, delete when Firestore works
-  async mounted() {
-    await loadWeeklyDateObjs();
   },
   created() {
     // load data from store
