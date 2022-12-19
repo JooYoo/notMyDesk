@@ -4,6 +4,18 @@ import { generateWeeklyEmptyFloorsBy } from "@/share/SeatManager";
 import { isWeeklyFloorOutOfDate } from "@/share/DateManager";
 import { isObjEmpty } from "@/share/Util";
 
+// firebase - save data into Firestore
+function fbSaveData(weeklyDateObjs) {
+    // iterate generated-weekly-objs
+    weeklyDateObjs.forEach(obj => {
+        // save objs one by one ( 7 in total)
+        addDoc(collection(db, 'weeklyDateObjs'), {
+            fullDate: obj.fullDate,
+            floors: obj.floors
+        })
+    })
+}
+
 // firebase - load data (real-time) from Firestore
 function fbRealTimeLoadData() {
     // create a promise 
@@ -23,18 +35,6 @@ function fbRealTimeLoadData() {
 
             // output the data from Firestore
             resolve(fbWeeklyDateObjs)
-        })
-    })
-}
-
-// firebase - save data into Firestore
-function fbSaveData(weeklyDateObjs) {
-    // iterate generated-weekly-objs
-    weeklyDateObjs.forEach(obj => {
-        // save objs one by one ( 7 in total)
-        addDoc(collection(db, 'weeklyDateObjs'), {
-            fullDate: obj.fullDate,
-            floors: obj.floors
         })
     })
 }
