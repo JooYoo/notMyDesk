@@ -103,17 +103,10 @@ async function cleanUpWeeklyDateObjs() {
     }
 }
 
-// db - load data logic
-async function loadWeeklyDateObjs() {
+// db - if no data in DB then generate otherwise return
+function getWeeklyDateObjs(fbWeeklyDateObjs) {
     let weeklyDateObjs = null
 
-    // if data is out of date then clean up localStorage
-    await cleanUpWeeklyDateObjs()
-
-    // get real-time-data from Firestore 
-    const fbWeeklyDateObjs = await fbRealTimeLoadData()
-
-    // TODO: refactor to one method
     // if no data in DB then generate
     if (isObjEmpty(fbWeeklyDateObjs)) {
         weeklyDateObjs = generateWeeklyEmptyFloorsBy([3, 4, 5])
@@ -127,9 +120,26 @@ async function loadWeeklyDateObjs() {
     return weeklyDateObjs
 }
 
+// db - load data logic
+async function loadWeeklyDateObjs() {
+    let weeklyDateObjs = null
+
+    // if data is out of date then clean up localStorage
+    await cleanUpWeeklyDateObjs()
+
+    // get real-time-data from Firestore 
+    const fbWeeklyDateObjs = await fbRealTimeLoadData()
+
+    // if no data in DB then generate
+    weeklyDateObjs = getWeeklyDateObjs(fbWeeklyDateObjs)
+
+    return weeklyDateObjs
+}
+
 export {
     loadWeeklyDateObjs,
     fbUpdateObj,
     cleanUpWeeklyDateObjs,
+    getWeeklyDateObjs,
     fbSaveData
 }

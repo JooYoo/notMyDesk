@@ -26,7 +26,11 @@ import FloorComponent from "@/components/Floor.vue";
 import WeeklyDatePickerComponent from "@/components/WeeklyDatePicker.vue";
 import { db } from "@/firebase/index";
 import { collection, onSnapshot } from "firebase/firestore";
-import { cleanUpWeeklyDateObjs, fbSaveData } from "@/firebase/FirestoreManager";
+import {
+  cleanUpWeeklyDateObjs,
+  getWeeklyDateObjs,
+  fbSaveData,
+} from "@/firebase/FirestoreManager";
 import { isObjEmpty } from "@/share/Util";
 export default {
   name: "App",
@@ -92,16 +96,8 @@ export default {
         fbWeeklyDateObjs.push(newObj);
       });
 
-      // if no data in DB then generate
-      // TODO: can be refactored
-      if (isObjEmpty(fbWeeklyDateObjs)) {
-        this.weeklyFloors = generateWeeklyEmptyFloorsBy([3, 4, 5]);
-        // save new generated data to firestore
-        fbSaveData(fbWeeklyDateObjs);
-      } else {
-        // if data exists then get data from LocalStorage
-        this.weeklyFloors = fbWeeklyDateObjs;
-      }
+      // if no data in DB then generate otherwise return
+      this.weeklyFloors = getWeeklyDateObjs(fbWeeklyDateObjs);
 
       // default: get today date
       let todayFullDate = getCurrentDate().fullDate;
