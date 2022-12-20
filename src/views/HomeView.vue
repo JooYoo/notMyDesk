@@ -24,6 +24,10 @@ import SideNavItemComponent from "@/components/SideNavItem.vue";
 import SideNavComponent from "@/components/SideNav.vue";
 import FloorComponent from "@/components/Floor.vue";
 import WeeklyDatePickerComponent from "@/components/WeeklyDatePicker.vue";
+import { db } from "@/firebase/index";
+import { collection, onSnapshot } from "firebase/firestore";
+import { cleanUpWeeklyDateObjs, fbSaveData } from "@/firebase/FirestoreManager";
+import { isObjEmpty } from "@/share/Util";
 export default {
   name: "App",
   components: {
@@ -68,21 +72,49 @@ export default {
       );
     },
   },
-  created() {
-    // load data from store
-    this.weeklyFloors = this.$store.state.weeklyFloors;
+  async created() {
+    // TODO: check if new week comes the data should be updated
+    // check Firestore data if data out of date
+    await cleanUpWeeklyDateObjs();
+  },
+  mounted() {
+    // listening Firestore data changes
+    onSnapshot(collection(db, "weeklyDateObjs"), (querySnapshot) => {
+      let fbWeeklyDateObjs = [];
 
-    // default: get today date
-    let todayFullDate = getCurrentDate().fullDate;
+      querySnapshot.forEach((doc) => {
+        const newObj = {
+          id: doc.id,
+          fullDate: doc.data().fullDate,
+          floors: doc.data().floors,
+        };
+        // load data from Firestore
+        fbWeeklyDateObjs.push(newObj);
+      });
 
-    // get selected-date floors descending
-    this.selectDayfloors = this.getSelectDayFloors(
-      this.weeklyFloors,
-      todayFullDate
-    );
+      // if no data in DB then generate
+      // TODO: can be refactored
+      if (isObjEmpty(fbWeeklyDateObjs)) {
+        this.weeklyFloors = generateWeeklyEmptyFloorsBy([3, 4, 5]);
+        // save new generated data to firestore
+        fbSaveData(fbWeeklyDateObjs);
+      } else {
+        // if data exists then get data from LocalStorage
+        this.weeklyFloors = fbWeeklyDateObjs;
+      }
 
-    // default: active 3rd floor
-    this.currentFloor = this.selectDayfloors.filter((x) => x.id === 3)[0];
+      // default: get today date
+      let todayFullDate = getCurrentDate().fullDate;
+
+      // get selected-date floors descending
+      this.selectDayfloors = this.getSelectDayFloors(
+        this.weeklyFloors,
+        todayFullDate
+      );
+
+      // default: active 3rd floor
+      this.currentFloor = this.selectDayfloors.filter((x) => x.id === 3)[0];
+    });
   },
 };
 </script>

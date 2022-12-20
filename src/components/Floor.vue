@@ -34,6 +34,10 @@ export default {
   },
   methods: {
     getSeatGroups(selectedFloor) {
+      if (!selectedFloor) {
+        return;
+      }
+
       let seats = selectedFloor.seats;
 
       if (!seats) {
