@@ -1,7 +1,7 @@
 import { getWeekDates } from "./DateManager.js";
 
 // 1 => "1st Floor"
-function getFloorNameEn(nr) {
+function _computeFloorNameEn(nr) {
     let floorName = ""
     switch (nr) {
         case 1:
@@ -24,6 +24,11 @@ function getFloorNameEn(nr) {
     }
 
     return floorName
+}
+
+// compute seat-side based on desk-nr
+function _computeSide(deskNr) {
+    return deskNr < 17 ? 'left' : 'right'
 }
 
 // get seats by floorId and fullDate
@@ -87,12 +92,16 @@ function createSeats(floorId, floorName, fullDate) {
     // create seats for one floor
     let newSeats = []
     for (let i = 1; i < 33; i++) {
+        // compute seat side
+        const seatSide = _computeSide(i)
+        // new seat instance
         const newSeat = {
             deskNr: i,
             occupiedBy: "",
             floorId: floorId,
             floorName: floorName,
-            fullDate: fullDate
+            fullDate: fullDate,
+            side: seatSide
         }
         newSeats.push(newSeat)
     }
@@ -120,7 +129,7 @@ function generateWeeklyEmptyFloorsBy(floorNrArray) {
         // iterate floors: 3 floors
         floorNrArray.forEach(floorNr => {
             let floorId = floorNr
-            let floorName = getFloorNameEn(floorNr)
+            let floorName = _computeFloorNameEn(floorNr)
             // iterate seats: 32 seats
             let newSeats = createSeats(floorId, floorName, currFullDate)
 
