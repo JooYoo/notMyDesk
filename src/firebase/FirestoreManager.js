@@ -1,6 +1,6 @@
 import { collection, getDocs, onSnapshot, addDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase/index";
-import { generateWeeklyEmptyFloorsBy } from "@/share/SeatManager";
+import { generateWeeklyDateObjs } from "@/share/SeatManager";
 import { isWeeklyFloorOutOfDate } from "@/share/DateManager";
 import { isObjEmpty } from "@/share/Util";
 
@@ -109,7 +109,7 @@ function getWeeklyDateObjs(fbWeeklyDateObjs) {
 
     // if no data in DB then generate
     if (isObjEmpty(fbWeeklyDateObjs)) {
-        weeklyDateObjs = generateWeeklyEmptyFloorsBy([3, 4, 5])
+        weeklyDateObjs = generateWeeklyDateObjs([3, 4, 5])
         // save new generated data to firestore
         fbSaveData(weeklyDateObjs)
     } else {

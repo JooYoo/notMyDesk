@@ -88,7 +88,7 @@ function gatherGroups(seats, eachGroupCounts) {
 }
 
 // generate new seats x 32
-function createSeats(floorId, floorName, fullDate) {
+function _generateSeats(floorId, floorName, fullDate) {
     // create seats for one floor
     let newSeats = []
     for (let i = 1; i < 33; i++) {
@@ -108,13 +108,13 @@ function createSeats(floorId, floorName, fullDate) {
     return newSeats
 }
 
-// generate empty Floors for the whole week
-// - param: floorNrArray => e.g. [3,4,5]
-function generateWeeklyEmptyFloorsBy(floorNrArray) {
+// generate empty weekly-date-objs
+// - floorNrArray: e.g. [3,4,5]
+function generateWeeklyDateObjs(floorNrArray) {
+    let weeklyDateObjs = []
+
     // get current week dates
     let currentWeekDates = getWeekDates()
-
-    let weeklyFloors = []
 
     // iterate week-dates: 7 days
     currentWeekDates.forEach(currDate => {
@@ -131,7 +131,7 @@ function generateWeeklyEmptyFloorsBy(floorNrArray) {
             let floorId = floorNr
             let floorName = _computeFloorNameEn(floorNr)
             // iterate seats: 32 seats
-            let newSeats = createSeats(floorId, floorName, currFullDate)
+            let newSeats = _generateSeats(floorId, floorName, currFullDate)
 
             let newFloor = {
                 id: floorId,
@@ -141,10 +141,10 @@ function generateWeeklyEmptyFloorsBy(floorNrArray) {
             }
             newFloors.push(newFloor)
         })
-        weeklyFloors.push(newWeeklyFloor)
+        weeklyDateObjs.push(newWeeklyFloor)
     })
 
-    return weeklyFloors
+    return weeklyDateObjs
 }
 
 export {
@@ -152,5 +152,5 @@ export {
     getFloorsBy,
     setOccupyToStore,
     gatherGroups,
-    generateWeeklyEmptyFloorsBy
+    generateWeeklyDateObjs
 }

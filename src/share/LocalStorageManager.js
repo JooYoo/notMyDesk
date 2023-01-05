@@ -1,4 +1,4 @@
-import { generateWeeklyEmptyFloorsBy } from "@/share/SeatManager";
+import { generateWeeklyDateObjs } from "@/share/SeatManager";
 import { getWeekDates } from "@/share/DateManager";
 
 // storage - load data from LocalStorage
@@ -10,7 +10,7 @@ function loadData() {
     const storageWeeklyFloors = localStorage.getItem("weeklyDateObjs")
     // if no data in storage then generate 
     if (!storageWeeklyFloors) {
-        weeklyFloors = generateWeeklyEmptyFloorsBy([3, 4, 5]);
+        weeklyFloors = generateWeeklyDateObjs([3, 4, 5]);
         // save new generated data to localStorage
         saveData(weeklyFloors)
     } else {
