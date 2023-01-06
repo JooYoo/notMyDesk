@@ -54,6 +54,16 @@ function setOccupyToStore(floor, selectedSeat, newOccupiedBy) {
     seat.occupiedBy = newOccupiedBy
 }
 
+// get left/right-seats from the selected-floor
+function _getSelectedFloorSeatsForOneRoom(selectedFloor, roomSide) {
+    // get selected-floor-seats
+    var selectedFloorSeats = selectedFloor.seats;
+    // get current floor left/right seats
+    var seats = selectedFloorSeats.filter(seat => seat.side == roomSide);
+
+    return seats;
+}
+
 // group seats based on each-group-count for UI
 function gatherGroups(seats, eachGroupCounts) {
     let groups = [];
@@ -85,6 +95,16 @@ function gatherGroups(seats, eachGroupCounts) {
     }
 
     return groups;
+}
+
+// get one-room-seat-groups
+function getOneRoomSeatGroups(selectedFloor, roomSide) {
+    // seats for one room
+    let oneRoomSeats = _getSelectedFloorSeatsForOneRoom(selectedFloor, roomSide)
+    // one room seat groups
+    let oneRoomSeatGroups = gatherGroups(oneRoomSeats, [6, 6, 4])
+
+    return oneRoomSeatGroups
 }
 
 // generate new seats x 32
@@ -152,5 +172,6 @@ export {
     getFloorsBy,
     setOccupyToStore,
     gatherGroups,
-    generateWeeklyDateObjs
+    generateWeeklyDateObjs,
+    getOneRoomSeatGroups
 }

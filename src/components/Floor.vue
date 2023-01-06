@@ -1,54 +1,41 @@
 <template>
-  <div class="floor-container">
-    <div class="desk-groups-wrapper">
-      <DeskGroup
-        v-for="(group, id) in seatGroups"
-        :key="id"
-        :seatGroup="group"
-      />
-    </div>
+  <div
+    v-if="isCurrentFloorExist"
+    class="floor-container"
+  >
+    <Room
+      :currentFloor="currentFloor"
+      :roomSide="'left'"
+    />
+    <Room
+      :currentFloor="currentFloor"
+      :roomSide="'right'"
+    />
+    <!-- <div
+      v-if="isCurrentFloorExist"
+      class="desk-groups-wrapper"
+    >
+    </div> -->
   </div>
 </template>
   
 <script>
-import { gatherGroups } from "@/share/SeatManager";
 import WeeklyDatePickerComponent from "./WeeklyDatePicker.vue";
 import DeskGroupComponent from "./DeskGroup.vue";
+import RoomComponent from "./Room.vue";
 
 export default {
   components: {
     DeskGroup: DeskGroupComponent,
     WeeklyDatePicker: WeeklyDatePickerComponent,
+    Room: RoomComponent,
   },
   props: ["currentFloor"],
-  data() {
-    return {
-      eachGroupCounts: [6, 6, 6, 6, 4, 4],
-      seatGroups: null,
-    };
-  },
-  watch: {
-    currentFloor(newVal, oldVal) {
-      this.getSeatGroups(newVal);
+  computed: {
+    // prevent component rendering too fast
+    isCurrentFloorExist() {
+      return this.currentFloor;
     },
-  },
-  methods: {
-    getSeatGroups(selectedFloor) {
-      if (!selectedFloor) {
-        return;
-      }
-
-      let seats = selectedFloor.seats;
-
-      if (!seats) {
-        return [];
-      }
-
-      this.seatGroups = gatherGroups(seats, this.eachGroupCounts);
-    },
-  },
-  mounted() {
-    this.getSeatGroups(this.currentFloor);
   },
 };
 </script>
