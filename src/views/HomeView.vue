@@ -1,20 +1,43 @@
 <template>
-  <div class="home-container">
-    <SideNav>
-      <SideNavItem
-        v-for="floor in selectDayfloors"
-        :key="floor.id"
-        :floorInfo="floor"
-        :selectedFloor="currentFloor"
-        @click="switchFloor(floor)"
-      />
-    </SideNav>
+  <v-card
+    class="mx-auto"
+    height="100%"
+  >
+    <v-layout class="v-layout">
+      <v-app-bar
+        color="white"
+        density="compact"
+      >
+        <template v-slot:prepend>
+          <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        </template>
 
-    <div class="floor-container">
-      <WeeklyDatePicker @selectedDate="getSelectedDateFloor" />
-      <Floor :currentFloor="currentFloor" />
-    </div>
-  </div>
+        <v-app-bar-title>Xrd Floor</v-app-bar-title>
+
+        <template v-slot:append>
+          <v-btn icon="mdi-dots-vertical"></v-btn>
+        </template>
+      </v-app-bar>
+
+      <v-main>
+        <div class="home-container">
+          <SideNav>
+            <SideNavItem
+              v-for="floor in selectDayfloors"
+              :key="floor.id"
+              :floorInfo="floor"
+              :selectedFloor="currentFloor"
+              @click="switchFloor(floor)"
+            />
+          </SideNav>
+          <div class="floor-container">
+            <WeeklyDatePicker @selectedDate="getSelectedDateFloor" />
+            <Floor :currentFloor="currentFloor" />
+          </div>
+        </div>
+      </v-main>
+    </v-layout>
+  </v-card>
 </template>
 
 <script>
@@ -116,6 +139,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-layout {
+  height: 100%;
+}
+
 .home-container {
   display: flex;
   height: 100%;
