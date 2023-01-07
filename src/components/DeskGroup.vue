@@ -32,7 +32,7 @@ export default {
     grid-template-columns: repeat(3, auto);
     grid-template-rows: repeat(2, auto);
   }
-  &:nth-child(n + 5) {
+  &:nth-child(n + 3) {
     grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(2, auto);
   }

@@ -48,6 +48,7 @@ export default {
 <style lang="scss" scoped>
 .weekly-date-picker-container {
   padding: 20px 40px;
+  height: 20%;
 
   .picker-item-wrapper {
     display: flex;

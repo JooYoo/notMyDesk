@@ -11,11 +11,6 @@
       :currentFloor="currentFloor"
       :roomSide="'right'"
     />
-    <!-- <div
-      v-if="isCurrentFloorExist"
-      class="desk-groups-wrapper"
-    >
-    </div> -->
   </div>
 </template>
   
@@ -42,18 +37,13 @@ export default {
   
 <style lang="scss" scoped>
 .floor-container {
-  width: 100%;
-}
-
-.desk-groups-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20%;
   padding: 40px;
+  padding-top: unset;
   width: 100%;
-
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  grid-template-rows: repeat(3, auto);
-  align-content: center;
-  justify-content: space-evenly;
-  gap: 40px;
+  height: 70%;
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
-  <div class="rooms-wrapper">
+  <div
+    class="room-wrapper"
+    :class="seatsAlignment"
+  >
     <DeskGroup
       v-for="(oneGroupSeats, id) in oneRoomSeatGroups"
       :key="id"
@@ -21,9 +24,34 @@ export default {
     oneRoomSeatGroups() {
       return getOneRoomSeatGroups(this.currentFloor, this.roomSide);
     },
+    currentRoomSide() {
+      const oneRoomSeatGroups = getOneRoomSeatGroups(
+        this.currentFloor,
+        this.roomSide
+      );
+      return oneRoomSeatGroups[0][0].side;
+    },
+    seatsAlignment() {
+      return this.currentRoomSide == "left"
+        ? "seats-align--start"
+        : "seats-align--end";
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.room-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+}
+.seats-align--start {
+  align-items: flex-start;
+}
+.seats-align--end {
+  align-items: flex-end;
+}
 </style>
