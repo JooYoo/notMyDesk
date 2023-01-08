@@ -39,7 +39,7 @@ export default {
 .floor-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 20%;
   padding: 40px;
   padding-top: unset;
