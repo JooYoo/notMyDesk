@@ -6,13 +6,18 @@
     >
       <template v-slot:activator="{ props }">
         <v-btn
-          :color="deskColor(seat.floorId)"
+          variant="outlined"
+          size="large"
+          elevation="2"
           v-bind="props"
         >
           <span class="desk-txt">
             {{seat.deskNr}}.
           </span>
-          {{seat.occupiedBy}}
+          <!-- :color="deskColor(seat.floorId)" -->
+          <span>
+            {{seat.occupiedBy}}
+          </span>
         </v-btn>
       </template>
 
@@ -109,13 +114,13 @@ export default {
         let deskColor = "";
         switch (floorId) {
           case 3:
-            deskColor = "indigo darken-1";
+            deskColor = "red";
             break;
           case 4:
-            deskColor = "teal darken-1";
+            deskColor = "blue";
             break;
           case 5:
-            deskColor = "purple darken-1";
+            deskColor = "purple";
             break;
           default:
             break;
