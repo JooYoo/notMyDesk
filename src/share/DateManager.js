@@ -34,11 +34,13 @@ function getWeekDates() {
         const startDay = today.getDay() === 0 ? 7 : today.getDay();
         const day = today.setDate(today.getDate() - startDay + i)
         const date = new Date(day).toISOString().slice(0, 10)
+        const monthName = new Date(day).toLocaleString('default', { month: 'short' })
 
         const currDay = {
             fullDate: date,
             weekDay: getWeekDayEn(i),
-            monthDay: today.getDate()
+            monthDay: today.getDate(),
+            monthName: monthName
         }
 
         week.push(currDay)

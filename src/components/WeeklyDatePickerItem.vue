@@ -2,6 +2,7 @@
   <div :class="['picker-item-container', state]">
     <div class="week-day">{{weekDate.weekDay}}</div>
     <div class="month-day">{{weekDate.monthDay}}</div>
+    <div>{{weekDate.monthName}}</div>
   </div>
 </template>
 
@@ -35,25 +36,41 @@ export default {
 
 <style lang="scss" scoped>
 .picker-item-container {
-  margin-top: 16px;
-  padding: 28px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 20px 4px;
   width: 72px;
-  height: 110px;
-  border-radius: 6em;
+  border-radius: 0.8em;
+
+  .month-day {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+  }
 
   &:hover {
     background-color: black;
     color: whitesmoke;
+
+    .month-day {
+      color: whitesmoke;
+    }
   }
 
   &--unselected {
-    background-color: unset;
+    background-color: rgba(0, 0, 0, 0.03);
     color: rgba(0, 0, 0, 0.5);
   }
 
   &--selected {
     background-color: black;
     color: whitesmoke;
+
+    .month-day {
+      color: whitesmoke;
+    }
   }
 
   color: rgba(0, 0, 0, 0.5);

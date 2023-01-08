@@ -1,6 +1,6 @@
 <template>
   <div class="weekly-date-picker-container">
-    <div class="text-h5 curr-date-txt">{{currentDate.fullDate}}</div>
+    <!-- <div class="text-h5 curr-date-txt">{{currentDate.fullDate}}</div> -->
     <div class="picker-item-wrapper">
       <WeeklyDatePickerItem
         v-for="(weekDate, id) in weekDates"
@@ -47,12 +47,12 @@ export default {
 
 <style lang="scss" scoped>
 .weekly-date-picker-container {
-  padding: 20px 40px;
-  height: 20%;
+  padding: 32px 40px;
+  background-color: rgba(0, 0, 0, 0.02);
 
   .picker-item-wrapper {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
   }
 
