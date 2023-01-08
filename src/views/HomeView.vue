@@ -1,23 +1,44 @@
 <template>
-  <v-card
-    class="mx-auto"
-    height="100%"
-  >
+  <v-card height="100%">
     <v-layout class="v-layout">
       <v-app-bar
         color="white"
-        density="compact"
+        class="flex-grow-0"
       >
         <template v-slot:prepend>
-          <v-app-bar-nav-icon></v-app-bar-nav-icon>
+          <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         </template>
-
-        <v-app-bar-title>Xrd Floor</v-app-bar-title>
-
+        <v-app-bar-title v-if="currentFloor">{{currentFloor.floorName}}</v-app-bar-title>
         <template v-slot:append>
           <v-btn icon="mdi-dots-vertical"></v-btn>
         </template>
       </v-app-bar>
+
+      <v-navigation-drawer
+        v-model="drawer"
+        app
+      >
+        <v-list-item class="nav-title">
+          <v-list-item-content>
+            <v-list-item-title class="text-h5">{{currentFloor.floorName}}</v-list-item-title>
+            <v-list-item-subtitle>{{currentFloor.fullDate}}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list
+          density="compact"
+          nav
+        >
+          <v-list-item
+            v-for="floor in selectDayfloors"
+            :key="floor.id"
+            :title="floor.floorName"
+            :value="floor.floorName"
+            :prepend-icon="`mdi-numeric-${floor.id}-box-multiple-outline`"
+            @click="switchFloor(floor)"
+          ></v-list-item>
+        </v-list>
+      </v-navigation-drawer>
 
       <v-main>
         <div class="home-container">
@@ -65,6 +86,9 @@ export default {
   },
   data() {
     return {
+      // ui
+      drawer: false,
+      // data
       weeklyFloors: null,
       selectDayfloors: null,
       currentFloor: null,
@@ -139,6 +163,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.nav-title {
+  margin-top: 28px;
+  margin-bottom: 28px;
+}
 .v-layout {
   height: 100%;
 }
