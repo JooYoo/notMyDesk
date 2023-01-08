@@ -19,7 +19,7 @@
         app
       >
         <v-list-item class="nav-title">
-          <v-list-item-content>
+          <v-list-item-content v-if="currentFloor">
             <v-list-item-title class="text-h5">{{currentFloor.floorName}}</v-list-item-title>
             <v-list-item-subtitle>{{currentFloor.fullDate}}</v-list-item-subtitle>
           </v-list-item-content>
