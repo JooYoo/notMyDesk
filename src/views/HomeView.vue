@@ -18,10 +18,10 @@
         v-model="drawer"
         app
       >
-        <v-list-item class="nav-title">
+        <v-list-item class="nav-title-wrapper">
           <v-list-item-content v-if="currentFloor">
-            <v-list-item-title class="text-h5">{{currentFloor.floorName}}</v-list-item-title>
-            <v-list-item-subtitle>{{currentFloor.fullDate}}</v-list-item-subtitle>
+            <v-list-item-title class="text-h5 nav-title">{{currentFloor.floorName}}</v-list-item-title>
+            <v-list-item-subtitle class="nav-subtitle">{{currentFloor.fullDate}}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
@@ -42,7 +42,7 @@
 
       <v-main>
         <div class="home-container">
-          <SideNav>
+          <!-- <SideNav>
             <SideNavItem
               v-for="floor in selectDayfloors"
               :key="floor.id"
@@ -50,7 +50,7 @@
               :selectedFloor="currentFloor"
               @click="switchFloor(floor)"
             />
-          </SideNav>
+          </SideNav> -->
           <div class="floor-container">
             <WeeklyDatePicker @selectedDate="getSelectedDateFloor" />
             <Floor :currentFloor="currentFloor" />
@@ -124,7 +124,6 @@ export default {
     },
   },
   async created() {
-    // TODO: check if new week comes the data should be updated
     // check Firestore data if data out of date
     await cleanUpWeeklyDateObjs();
   },
@@ -164,9 +163,12 @@ export default {
 
 <style lang="scss" scoped>
 .nav-title {
-  margin-top: 28px;
-  margin-bottom: 28px;
+  padding-top: 64px;
 }
+.nav-subtitle {
+  padding-bottom: 64px;
+}
+
 .v-layout {
   height: 100%;
 }
