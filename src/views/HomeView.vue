@@ -32,11 +32,17 @@
           <v-list-item
             v-for="floor in selectDayfloors"
             :key="floor.id"
-            :title="floor.floorName"
-            :value="floor.floorName"
-            :prepend-icon="`mdi-numeric-${floor.id}-box-multiple-outline`"
             @click="switchFloor(floor)"
-          ></v-list-item>
+            class="nav-list-item"
+          >
+            <template v-slot:prepend>
+              <v-icon :icon="`mdi-numeric-${floor.id}-box-multiple-outline`"></v-icon>
+            </template>
+            <v-list-item-title
+              class="nav-item-title"
+              v-text="floor.floorName"
+            ></v-list-item-title>
+          </v-list-item>
         </v-list>
       </v-navigation-drawer>
 
@@ -166,7 +172,13 @@ export default {
   padding-top: 64px;
 }
 .nav-subtitle {
-  padding-bottom: 64px;
+  padding-top: 12px;
+  padding-bottom: 52px;
+}
+
+.nav-item-title {
+  position: absolute;
+  transform: translateY(-50%);
 }
 
 .v-layout {
