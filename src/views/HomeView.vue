@@ -104,6 +104,8 @@ export default {
     // switch floor and send selected-floor as current-floor
     switchFloor(floorInfo) {
       this.currentFloor = floorInfo;
+      // set selected-floor-id in store
+      this.setSelectedFloorId(floorInfo.id);
     },
     // get selected-date floors descending
     getSelectDayFloors(weeklyFloors, selectedDate) {
@@ -127,6 +129,10 @@ export default {
       this.currentFloor = this.selectDayfloors.find(
         (x) => x.id === currentFloorId
       );
+    },
+    // set selected-floor-id in store
+    setSelectedFloorId(selectedFloorId) {
+      this.$store.dispatch("setSelectedFloorId", selectedFloorId);
     },
   },
   async created() {
@@ -160,9 +166,11 @@ export default {
         todayFullDate
       );
 
-      // TODO: add floor-id to store
       // default: active 3rd floor
-      this.currentFloor = this.selectDayfloors.find((x) => x.id === 3);
+      const selectedFloorId = this.$store.state.selectedFloorId;
+      this.currentFloor = this.selectDayfloors.find(
+        (x) => x.id === selectedFloorId
+      );
     });
   },
 };
