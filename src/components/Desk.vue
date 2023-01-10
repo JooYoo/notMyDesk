@@ -22,36 +22,38 @@
       </template>
 
       <v-card>
-        <v-card-item>
-          <v-card-title>{{deskModalTitle(seat, occupiedBy)}}</v-card-title>
-          <v-card-subtitle>
-            <span class="mr-1">{{seat.fullDate}}</span>
-            <v-icon
-              :color="deskModalIconColor(seat.occupiedBy)"
-              :icon="deskModalIcon(seat.occupiedBy)"
-              size="small"
-            ></v-icon>
-          </v-card-subtitle>
-        </v-card-item>
+        <v-form @submit.prevent="saveAndClose">
+          <v-card-item>
+            <v-card-title>{{deskModalTitle(seat, occupiedBy)}}</v-card-title>
+            <v-card-subtitle>
+              <span class="mr-1">{{seat.fullDate}}</span>
+              <v-icon
+                :color="deskModalIconColor(seat.occupiedBy)"
+                :icon="deskModalIcon(seat.occupiedBy)"
+                size="small"
+              ></v-icon>
+            </v-card-subtitle>
+          </v-card-item>
 
-        <v-card-text>
-          <v-text-field
-            v-model="occupiedBy"
-            clearable
-            label="take the seat by typing your name"
-            variant="outlined"
-          ></v-text-field>
-        </v-card-text>
+          <v-card-text>
+            <v-text-field
+              v-model="occupiedBy"
+              clearable
+              label="take the seat by typing your name"
+              variant="outlined"
+            ></v-text-field>
+          </v-card-text>
 
-        <v-card-actions>
-          <v-btn
-            color="primary"
-            block
-            @click="saveAndClose()"
-          >
-            Save Close
-          </v-btn>
-        </v-card-actions>
+          <v-card-actions>
+            <v-btn
+              type="submit"
+              color="primary"
+              block
+            >
+              Save Close
+            </v-btn>
+          </v-card-actions>
+        </v-form>
       </v-card>
     </v-dialog>
   </div>
@@ -149,6 +151,7 @@ export default {
       );
       // set occupy to target-seat
       setOccupyToStore(floor, selectedSeat, this.occupiedBy);
+
       // save new-weeklyFloors to LocalStorage
       // saveData(weeklyDateObjs);
 

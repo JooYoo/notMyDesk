@@ -160,8 +160,9 @@ export default {
         todayFullDate
       );
 
+      // TODO: add floor-id to store
       // default: active 3rd floor
-      this.currentFloor = this.selectDayfloors.filter((x) => x.id === 3)[0];
+      this.currentFloor = this.selectDayfloors.find((x) => x.id === 3);
     });
   },
 };
