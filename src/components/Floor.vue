@@ -37,6 +37,7 @@ export default {
   
 <style lang="scss" scoped>
 .floor-container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -45,5 +46,50 @@ export default {
   padding-top: unset;
   width: 100%;
   height: 100%;
+
+  // TODO: wrap animation properties to new class
+  animation-name: goup;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes goup {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  25% {
+    transform: translate3d(0, -100%, 0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate3d(0, 100%, 0);
+    opacity: 0;
+  }
+  75% {
+    transform: translate3d(0, 0%, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes godown {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  25% {
+    transform: translate3d(0, 100%, 0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate3d(0, -100%, 0);
+    opacity: 0;
+  }
+  75% {
+    transform: translate3d(0, 0%, 0);
+    opacity: 1;
+  }
 }
 </style>
