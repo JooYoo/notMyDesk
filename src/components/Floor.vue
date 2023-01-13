@@ -1,7 +1,16 @@
 <template>
+  <!-- <v-tabs fixed-tabs>
+    <v-tab>
+      L E F T
+    </v-tab>
+    <v-tab>
+      R I G H T
+    </v-tab>
+  </v-tabs> -->
   <div
     v-if="isCurrentFloorExist"
     class="floor-container"
+    :class="moveFloorClass"
   >
     <Room
       :currentFloor="currentFloor"
@@ -32,15 +41,31 @@ export default {
   },
   data() {
     return {
-      direction: null,
+      moveFloorClass: "",
     };
   },
   props: ["currentFloor"],
   watch: {
+    // watch switch floor state
     currentFloor(newVal, oldVal) {
       if (oldVal && newVal) {
-        this.isGoUp(oldVal.id, newVal.id);
+        // check move-direction
+        this.checkDirection(oldVal.id, newVal.id);
       }
+    },
+  },
+  methods: {
+    checkDirection(oldId, newId) {
+      // set direct based on old-floor-id and new-floor-id
+      if (oldId < newId) {
+        this.moveFloorClass = "goup";
+      } else if (oldId > newId) {
+        this.moveFloorClass = "godown";
+      }
+      // reset move-floor-class
+      setTimeout(() => {
+        this.moveFloorClass = "";
+      }, 600);
     },
   },
   computed: {
@@ -48,30 +73,6 @@ export default {
     isCurrentFloorExist() {
       return this.currentFloor;
     },
-    // TODO: if goup then add goup-css-class, otherwise add godown-css-class
-    directionClass() {
-      switch (this.direction) {
-        case floorGo.up:
-          return "goup-class";
-        case floorGo.down:
-          return "godown-class";
-        default:
-          return "";
-      }
-    },
-  },
-  methods: {
-    // watch switch floor state
-    isGoUp(oldId, newId) {
-      if (oldId < newId) {
-        this.direction = floorGo.up;
-      } else {
-        this.direction = floorGo.down;
-      }
-    },
-  },
-  updated() {
-    console.log(this.directionClass);
   },
 };
 </script>
@@ -89,9 +90,10 @@ export default {
   height: 100%;
 }
 
+// switch floor animation
 .goup {
   animation-name: goup;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
@@ -117,12 +119,11 @@ export default {
 
 .godown {
   animation-name: godown;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
 }
-
 @keyframes godown {
   0% {
     transform: translate3d(0, 0, 0);
