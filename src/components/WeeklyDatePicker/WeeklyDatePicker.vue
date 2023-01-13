@@ -8,6 +8,7 @@
         :weekDate="weekDate"
         :selectedDay="currentDate"
         @click="switchDay(weekDate)"
+        class="picker-item"
       />
     </div>
   </div>
@@ -60,6 +61,16 @@ export default {
 
   .curr-date-txt {
     text-align: start;
+  }
+}
+
+@media (max-width: 800px) {
+  .weekly-date-picker-container {
+    padding: 8px 8px;
+
+    .picker-item {
+      transform: scale(0.85);
+    }
   }
 }
 </style>

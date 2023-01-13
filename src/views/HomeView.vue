@@ -73,7 +73,7 @@ import { getCurrentDate } from "@/share/DateManager";
 import SideNavItemComponent from "@/components/SideNavItem.vue";
 import SideNavComponent from "@/components/SideNav.vue";
 import FloorComponent from "@/components/Floor.vue";
-import WeeklyDatePickerComponent from "@/components/WeeklyDatePicker.vue";
+import WeeklyDatePickerComponent from "@/components/WeeklyDatePicker/WeeklyDatePicker.vue";
 import { db } from "@/firebase/index";
 import { collection, onSnapshot } from "firebase/firestore";
 import {

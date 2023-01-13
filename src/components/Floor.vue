@@ -24,14 +24,9 @@
 </template>
   
 <script>
-import WeeklyDatePickerComponent from "./WeeklyDatePicker.vue";
+import WeeklyDatePickerComponent from "./WeeklyDatePicker/WeeklyDatePicker.vue";
 import DeskGroupComponent from "./DeskGroup.vue";
 import RoomComponent from "./Room.vue";
-
-const floorGo = Object.freeze({
-  up: "up",
-  down: "down",
-});
 
 export default {
   components: {
