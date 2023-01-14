@@ -51,7 +51,8 @@ export default {
   position: relative;
   z-index: 1;
   padding: 32px 40px;
-  background-color: rgba(249, 249, 249);
+  // background-color: rgba(249, 249, 249);
+  background-color: white;
 
   .picker-item-wrapper {
     display: flex;

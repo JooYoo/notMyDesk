@@ -6,6 +6,7 @@
     <v-tabs
       v-model="tab"
       fixed-tabs
+      class="floor-tab-view__tabs"
     >
       <v-tab value="left">
         L E F T
@@ -14,7 +15,6 @@
         R I G H T
       </v-tab>
     </v-tabs>
-    <!-- TODO: switch floor tab should z-index-1, set bg-color -->
     <v-window
       v-model="tab"
       class="tab-window"
@@ -118,12 +118,20 @@ export default {
   padding-top: unset;
   width: 100%;
   height: 100%;
+  background-color: rgba(249, 249, 249);
 }
 
 // tab content
 .floor-tab-view {
   display: none;
   height: 100%;
+
+  &__tabs {
+    position: relative;
+    background-color: rgba(249, 249, 249);
+    z-index: 1;
+  }
+
   .tab-window {
     height: 100%;
     .tab-room-wrapper {
@@ -131,6 +139,7 @@ export default {
       justify-content: center;
       align-items: flex-start;
       height: 100%;
+      background-color: rgba(249, 249, 249);
     }
   }
 }
