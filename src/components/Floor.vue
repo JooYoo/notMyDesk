@@ -1,15 +1,49 @@
 <template>
-  <!-- <v-tabs fixed-tabs>
-    <v-tab>
-      L E F T
-    </v-tab>
-    <v-tab>
-      R I G H T
-    </v-tab>
-  </v-tabs> -->
   <div
     v-if="isCurrentFloorExist"
-    class="floor-container"
+    class="floor-tab-view"
+  >
+    <v-tabs
+      v-model="tab"
+      fixed-tabs
+    >
+      <v-tab value="left">
+        L E F T
+      </v-tab>
+      <v-tab value="right">
+        R I G H T
+      </v-tab>
+    </v-tabs>
+    <!-- TODO: switch floor tab should z-index-1, set bg-color -->
+    <v-window
+      v-model="tab"
+      class="tab-window"
+      :class="moveFloorClass"
+    >
+      <v-window-item
+        value="left"
+        class="tab-room-wrapper"
+      >
+        <Room
+          :currentFloor="currentFloor"
+          :roomSide="'left'"
+        />
+      </v-window-item>
+      <v-window-item
+        value="right"
+        class="tab-room-wrapper"
+      >
+        <Room
+          :currentFloor="currentFloor"
+          :roomSide="'right'"
+        />
+      </v-window-item>
+    </v-window>
+  </div>
+
+  <div
+    v-if="isCurrentFloorExist"
+    class="floor-full-view"
     :class="moveFloorClass"
   >
     <Room
@@ -37,6 +71,7 @@ export default {
   data() {
     return {
       moveFloorClass: "",
+      tab: null,
     };
   },
   props: ["currentFloor"],
@@ -73,7 +108,7 @@ export default {
 </script>
   
 <style lang="scss" scoped>
-.floor-container {
+.floor-full-view {
   position: relative;
   display: flex;
   justify-content: center;
@@ -83,6 +118,31 @@ export default {
   padding-top: unset;
   width: 100%;
   height: 100%;
+}
+
+// tab content
+.floor-tab-view {
+  display: none;
+  height: 100%;
+  .tab-window {
+    height: 100%;
+    .tab-room-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100%;
+    }
+  }
+}
+
+// responsive
+@media (max-width: 600px) {
+  .floor-full-view {
+    display: none;
+  }
+  .floor-tab-view {
+    display: unset;
+  }
 }
 
 // switch floor animation

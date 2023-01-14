@@ -64,7 +64,7 @@ export default {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 600px) {
   .weekly-date-picker-container {
     padding: 8px 8px;
 
