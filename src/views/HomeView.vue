@@ -70,8 +70,8 @@
 <script>
 import { getFloorsBy } from "@/share/SeatManager";
 import { getCurrentDate } from "@/share/DateManager";
-import SideNavItemComponent from "@/components/SideNavItem.vue";
-import SideNavComponent from "@/components/SideNav.vue";
+import SideNavItemComponent from "@/components/MySideNav/SideNavItem.vue";
+import SideNavComponent from "@/components/MySideNav/SideNav.vue";
 import FloorComponent from "@/components/Floor.vue";
 import WeeklyDatePickerComponent from "@/components/WeeklyDatePicker/WeeklyDatePicker.vue";
 import { db } from "@/firebase/index";
