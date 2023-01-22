@@ -59,7 +59,7 @@
   
 <script>
 import WeeklyDatePickerComponent from "./WeeklyDatePicker/WeeklyDatePicker.vue";
-import DeskGroupComponent from "./DeskGroup.vue";
+import DeskGroupComponent from "./Desk/DeskGroup.vue";
 import RoomComponent from "./Room.vue";
 
 export default {
