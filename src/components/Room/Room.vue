@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import DeskGroupComponent from "./Desk/DeskGroup.vue";
+import DeskGroupComponent from "@/components/Desk/DeskGroup.vue";
 import { getOneRoomSeatGroups } from "@/share/SeatManager";
 
 export default {
