@@ -82,10 +82,6 @@ function fbUpdateObj(weeklyDateObjs, selectedSeat) {
 
 // db - clean data logic
 async function cleanUpWeeklyDateObjs() {
-    /**
-     * TODO: check if new week comes the data should be updated
-     * if error try to use fbLoadData()
-     */
     // get data from Firebase
     // const fbWeeklyDateObjs = await fbLoadData()
 
